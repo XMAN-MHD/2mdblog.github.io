@@ -1,0 +1,44 @@
+#pagination 
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#pageButtons
+{
+    width: 300px; 
+    text-align: center;
+}
+#pageButtons button
+{
+    width: 50px; 
+    outline: white;
+    border-color: white; 
+    background-color: black;
+    color: white;
+
+}
+#pageButtons button:hover
+{
+    background-color: #0085A1;
+
+}
+#prevButton button
+{
+    outline: white;
+    border-color: white; 
+    background-color: black;
+    color: white;
+}
+#nextButton button
+{
+    outline: white;
+    border-color: white; 
+    background-color: black;
+    color: white;
+}
+#nextButton button:hover, #prevButton button:hover
+{
+    background-color: #0085A1;
+}
+

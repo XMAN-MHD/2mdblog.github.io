@@ -1,0 +1,274 @@
+<script>
+    
+    // Get the number of items to display on page's pagination
+    const items = document.querySelectorAll('#items li');
+    // Define the items to display per page
+    const itemsPerPage = 5;
+    // Define the page to show by default
+    let currentPage = 1;
+    // Store the button controls html
+    let prevButton = '';
+    let pageButtons = '';
+    let nextButton = '';
+    // Store the number of pages of the pagination
+    let numberOfPages = null;
+    // current page's button
+    let currentPageButton=null;
+    // Create the pagination
+    function createPagination() 
+    {
+        // Calculate the number of pages based on the number of items
+        numberOfPages = Math.ceil(items.length / itemsPerPage);
+        // remove prev and next button if no items
+        if(numberOfPages ==0)
+        {
+            document.querySelector('#prevButton').innerHTML='';   
+            document.querySelector('#nextButton').innerHTML='';   
+        }
+        // Create the button controls of the pagination and showing all of them
+        else if (numberOfPages <= 5) 
+        {
+            // Add "prev" button
+            prevButton = `<button class="pagination-button" id="prev-button">prev</button>`;
+            // Add page buttons
+            for (let i = 1; i <= numberOfPages; i++) 
+            {
+                if (i===1) 
+                {
+                    pageButtons += `<button class="pagination-button" id="button-one">${i}</button>`;
+                }
+                else
+                {
+                    pageButtons += `<button class="pagination-button">${i}</button>`;
+                }
+            }
+            // Add "next" button
+            nextButton = `<button class="pagination-button" id="next-button">next</button>`;
+        }
+        // show just some of the pagination button controls 
+        else 
+        {
+            // Add "prev" button
+            prevButton = `<button class="pagination-button" id="prev-button">prev</button>`;
+            // Add page buttons
+            for (let i = 1; i <= numberOfPages; i++) 
+            {
+                if( (i <= 3) ) 
+                {
+                    if (i===1) 
+                    {
+                        pageButtons += `<button class="pagination-button" id="button-one">${i}</button>`;
+                    }
+                    else
+                    {
+                        pageButtons += `<button class="pagination-button">${i}</button>`;
+                    }
+                }
+                if( (i == 4) ) 
+                {
+                    pageButtons += `...`;
+                } 
+                if( (i > numberOfPages-1) ) 
+                {
+                    pageButtons += `<button class="pagination-button" >${i}</button>`;
+                }
+            }
+            // Add "next" button
+            nextButton = `<button class="pagination-button" id="next-button">next</button>`;
+        }
+        // Render the pagination button controls
+        document.querySelector('#prevButton').innerHTML = prevButton;
+        document.querySelector('#pageButtons').innerHTML = pageButtons;
+        document.querySelector('#nextButton').innerHTML = nextButton;
+    }
+    // Rereder the pagination buttons
+    function rerenderPaginationButtons() 
+    {
+        document.querySelector('#prevButton').innerHTML = prevButton;
+        document.querySelector('#pageButtons').innerHTML = pageButtons;
+        document.querySelector('#nextButton').innerHTML = nextButton;
+    }
+    // Show the right items per page of the pagination
+    function showPage(page) 
+    {
+        // get the current page to show
+        currentPage = page;
+        // Highliht the page the current pages's buttons by changing the background color
+        let paginationButtons = document.querySelectorAll('#pagination button');
+        for (let i = 0; i < paginationButtons.length; i++) 
+        {
+                paginationButtons[i].style.backgroundColor = 'black';
+        }   
+        for (let i = 0; i < paginationButtons.length; i++) 
+        {
+            if(Number(paginationButtons[i].textContent) === currentPage)
+            {
+                paginationButtons[i].style.backgroundColor = '#0085A1';
+            }
+        }
+        // calculate the right items to show on the page 
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        // Display the right items of the current page then hide the other items
+        items.forEach(
+            (item, index) => 
+            {
+                if (index >= startIndex && index < endIndex) 
+                {
+                    item.style.display = 'block';
+                } 
+                else 
+                {
+                    item.style.display = 'none';
+                }
+            }
+        );
+    }
+    // Update the pagination buttons
+    function updatePaginationButtons(pageNumber) 
+    {
+            // remove the the buttons controls of the pagination
+            pageButtons = ""; 
+            rerenderPaginationButtons();
+            // the page number greater than 1 and less than the number of page
+            if ( (pageNumber > 1) &&(numberOfPages >=4) && (pageNumber + 1 <=numberOfPages)) 
+            {
+                
+                // Add page buttons
+                if (pageNumber == 3)
+                {
+                    pageButtons += `<button class="pagination-button">${1}</button>`;
+                }
+                if (pageNumber !== 2 && pageNumber !== 3) 
+                {
+                    pageButtons += `<button class="pagination-button">${1}</button>...`;
+                }
+                pageButtons += `<button class="pagination-button">${pageNumber - 1}</button>`;
+                pageButtons+= `<button class="pagination-button">${pageNumber}</button>`;
+                pageButtons += `<button class="pagination-button">${pageNumber + 1}</button>`;
+                if (pageNumber !== numberOfPages-1 && pageNumber+1 !==numberOfPages-1) 
+                {
+                    pageButtons += `...<button class="pagination-button">${numberOfPages}</button>`;
+                } 
+                if (pageNumber == numberOfPages-2) 
+                {
+                    pageButtons += `<button class="pagination-button">${numberOfPages}</button>`;
+                }
+           
+            }
+            else
+            {
+                 // the first page
+                if(pageNumber === 1)
+                {
+
+                    // Add page buttons
+                    for (let i = 1; i <= numberOfPages; i++) 
+                    {
+                        if( (i <= 3) ) 
+                        {
+                            pageButtons += `<button class="pagination-button">${i}</button>`;
+                        }
+                        if( (i == 4) ) 
+                        {
+                            pageButtons += `...`;
+                        } 
+                        if( (i > numberOfPages-1) ) 
+                        {
+                            pageButtons += `<button class="pagination-button">${i}</button>`;
+                        }
+                    }
+                }
+                // the last page
+                else 
+                {
+
+                    // Add page buttons
+                    for (let i = 1; i <= numberOfPages; i++) 
+                    {
+                        if( (i == 1) ) 
+                        {
+                            pageButtons += `<button class="pagination-button">${i}</button>`;
+                        }
+                        if( (i == 2) ) 
+                        {
+                            pageButtons += `...`;
+                        } 
+                        if( (i > numberOfPages-3    ) ) 
+                        {
+                            pageButtons += `<button class="pagination-button">${i}</button>`;
+                        }
+                    }
+                }
+            }
+            // Rereder the pagination buttons
+            rerenderPaginationButtons();
+    }
+    // Handle pagination button clicks
+    function handlePaginationButtonClicks(event) 
+    {
+
+        // Get the page number if a button page is clicked
+        let pageNumber = Number(event.target.textContent);
+        // Handle prev button clicks
+        if (event.target.id === 'prev-button') 
+        {
+            // Decrement current page and show previous page
+            if (currentPage - 1 > 0) 
+            {
+                currentPage--;
+                if(numberOfPages > 5) 
+                {
+                    updatePaginationButtons(currentPage);
+                }
+            }
+            showPage(currentPage);
+        }
+        // Handle next button clicks
+        else if (event.target.id === 'next-button') 
+        {
+            // Increment current page and show next page
+            if (currentPage + 1 <= numberOfPages) 
+            {
+                currentPage++;
+                if (numberOfPages > 5) 
+                {
+                    updatePaginationButtons(currentPage)
+                }
+            }
+            showPage(currentPage);
+        } 
+        // handle page button clicks
+        else 
+        {
+            if ( (pageNumber > 0) && (pageNumber <= numberOfPages) ) 
+            {
+                if (numberOfPages > 5) 
+                {
+                    updatePaginationButtons(pageNumber)
+                }
+                if (pageNumber > numberOfPages) 
+                {
+                    pageNumber = '' + previousPage;
+                }
+                if (pageNumber) 
+                {
+                    showPage(pageNumber);
+                }
+            }
+        }
+        
+    }
+    // Create the pagination
+    createPagination();
+    // Get current page's button and highlight it  by changing the background color
+    currentPageButton = document.querySelector('#button-one');
+    if (currentPageButton === document.querySelector('#button-one')) 
+    {
+        currentPageButton.style.backgroundColor = '#0085A1';
+    }
+    // Show the curret page for the first time
+    showPage(currentPage);
+    // Handle pagination button clicks
+    document.querySelector('#pagination').addEventListener('click', handlePaginationButtonClicks);
+</script>

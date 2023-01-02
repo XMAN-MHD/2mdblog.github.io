@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- head -->
+    <%- include('../layout/head.ejs') %>
+    <body>
+        <!-- Navigation-->
+        <%- include('../layout/navBar.ejs') %>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('/assets/img/courses-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Projets</h1>
+                            <span class="subheading">Inspirez-vous des projets de 2MD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <% if( (projectsPosts !== null) && (projectsPosts.length > 0) ) { %>
+                        <ul id="items">
+                            <% for(var i = projectsPosts.length - 1; i >= 0; i--) { %>
+                                <li>
+                                    <!-- Post preview-->
+                                    <div class="post-preview">
+                                        <a href="projets/<%= projectsPosts[i]._id %>">
+                                            <h2 class="post-title"><%= projectsPosts[i].title %></h2>
+                                        </a>
+                                        <p class="post-meta">
+                                            Posted by
+                                            <a href="/users/account"><%= projectsPosts[i].userId.username %></a>
+                                            <%= projectsPosts[i].postDate.toDateString() %>
+                                        </p>
+                                    </div>
+                                    <!-- Divider-->
+                                    <hr class="my-4" />
+                                </li>
+                            <% } %>
+                        </ul>
+                    <% } %>
+                </div>
+                <div id="pagination">
+                    <div id="prevButton"></div>
+                    <div id="pageButtons"></div>
+                    <div id="nextButton"></div>
+                </div> 
+            </div>
+        </div>
+        <!-- Footer-->
+        <%- include('../layout/footer.ejs') %>
+        <!-- Bootstrap core JS-->
+        <!-- Core theme JS-->
+        <%- include('../layout/script.ejs') %> 
+        <!-- Pagination JS-->
+        <%- include('../layout/paginationScript.ejs') %>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- head -->
+    <%- include('../layout/head.ejs') %>
+    <body>
+        <!-- Navigation-->
+        <%- include('../layout/navBar.ejs') %>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('<%= posts.postImage %>')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h3><%= posts.title %></h3>
+                            <p>
+                                Posted by
+                                <a href="/users/account" style="color: white;"><%= posts.userId.username %></a>
+                                <%= posts.postDate.toDateString() %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+             <!-- Post Content-->
+             <article class="mb-4">
+                <div class="container px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <%- posts.message %>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <!-- Footer-->
+        <%- include('../layout/footer.ejs') %>
+        <!-- Bootstrap core JS-->
+        <!-- Core theme JS-->
+        <%- include('../layout/script.ejs') %>
+    </body>
+</html>

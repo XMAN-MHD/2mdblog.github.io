@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- head -->
+    <%- include('../layout/head.ejs') %>
+    <body>
+        <!-- Navigation-->
+        <%- include('../layout/navBar.ejs') %>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('/assets/img/php-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Les Meilleurs</h1>
+                            <span class="subheading">méthodes d'apprentissage du Developement Web</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                  <!-- Welcome Text -->
+                  <h1 class="text-center">Bienvenue sur notre Blog !</h1>
+                  <p class="text-start text-wrap mt-3">
+                      Nous sommes passionnés par le développement web et croyons que c'est une compétence précieuse dans le monde d'aujourd'hui. 
+                      Dans ce blog, nous partagerons des conseils et des ressources pour vous aider à apprendre le développement web de manière réussie.
+                      Que vous soyez un débutant complet ou que vous ayez déjà une certaine expérience, nous avons quelque chose pour tout le monde. De l'apprentissage des bases de HTML et CSS jusqu'à la plongée dans des sujets plus avancés tels que JavaScript et la programmation côté serveur, nous fournirons un soutien et une guidance à chaque étape du parcours.
+                      Nous croyons qu'avec dévouement et les bons outils, n'importe qui peut apprendre à coder et à construire ses propres sites web. Nous vous remercions de vous joindre à nous dans ce voyage et espérons vous voir réussir dans vos objectifs de développement web !
+                      <figure>
+                        <img src="/assets/img/2md.jpg" class="rounded w-25" alt="...">
+                        <figcaption class="mt-2"><a href="#"><small class="fs-6">2MD</small></a></figcaption>
+                      </figure>
+                    </p>
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                  
+                    <% if( (posts !== null) && (posts.length > 0) ) { %>
+                        <ul id="items">
+                            <% for(var i = posts.length - 1; i >= 0; i--) { %>
+                                <li>
+                                    <!-- Post preview-->
+                                    <div class="post-preview">
+                                        <a href="posts/<%= posts[i]._id %>">
+                                            <h2 class="post-title"><%= posts[i].title %></h2>
+                                        </a>
+                                        <p class="post-meta">
+                                            Posted by
+                                            <a href="/users/account"><%= posts[i].userId.username %></a>
+                                            <%= posts[i].postDate.toDateString() %>
+                                        </p>
+                                    </div>
+                                    <!-- Divider-->
+                                    <hr class="my-4" />
+                                </li>
+                            <% } %>
+                        </ul>
+                    <% } %>
+                </div>
+                <div id="pagination">
+                    <div id="prevButton"></div>
+                    <div id="pageButtons"></div>
+                    <div id="nextButton"></div>
+                </div> 
+            </div>
+        </div>
+        <!-- Footer-->
+        <%- include('../layout/footer.ejs') %>
+        <!-- Bootstrap core JS-->
+        <!-- Core theme JS-->
+        <%- include('../layout/script.ejs') %> 
+        <!-- Pagination JS-->
+        <%- include('../layout/paginationScript.ejs') %>
+    </body>
+</html>

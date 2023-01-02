@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- head -->
+    <%- include('../layout/head.ejs') %>
+    <body>
+        <!-- Navigation-->
+        <%- include('../layout/navBar.ejs') %>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('/assets/img/contact-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>Contacte</h1>
+                            <span class="subheading">Avez-vous des questions ? J'ai des réponses.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <!-- Post preview-->
+                        <div class="post-preview">
+                            <a href="post.html">
+                                <h2 class="post-title">Qui est Mouhamed Moustapha Diouf alias 2MD</h2>
+                            </a>
+                            <p class="post-meta">
+                                Posted by
+                                <a href="#!">Start Bootstrap</a>
+                                on September 24, 2022
+                            </p>
+                        </div>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                        <!-- Post preview-->
+                        <div class="post-preview">
+                            <a href="post.html"><h2 class="post-title">Les projects créés par 2MD</h2></a>
+                            <p class="post-meta">
+                                Posted by
+                                <a href="#!">Start Bootstrap</a>
+                                on September 18, 2022
+                            </p>
+                        </div>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                        <!-- texte -->
+                        <p>Vous voulez entrer en contact? Remplissez le formulaire ci-dessous pour m'envoyer un message et je vous répondrai dès que possible!</p>
+                        <!-- formulaire -->
+                        <div class="my-5">
+                            <!-- * * * * * * * * * * * * * * *-->
+                            <!-- * * SB Forms Contact Form * *-->
+                            <!-- * * * * * * * * * * * * * * *-->
+                            <!-- This form is pre-integrated with SB Forms.-->
+                            <!-- To make this form functional, sign up at-->
+                            <!-- https://startbootstrap.com/solution/contact-forms-->
+                            <!-- to get an API token!-->
+                            <form id="contactForm" method="POST">
+                                <div class="form-floating">
+                                    <input name="name" class="form-control" id="name" type="text" placeholder="saisir votre prenom et nom..." />
+                                    <label for="name">Prénom et Nom</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input name="email" class="form-control" id="email" type="email" placeholder="saisir votre email..." />
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input name="phone" class="form-control" id="phone" type="tel" placeholder="saisir votre téléphone..." />
+                                    <label for="phone">Téléphone</label>
+                                </div>
+                                <br><br>
+                                <div class="form-floating">
+                                    <textarea name="message" class="form-control" id="message" placeholder="saisir votre message ici..." style="height: 12rem" ></textarea>
+                                    <script>
+                                        $('#message').summernote({
+                                          placeholder: 'saisir votre message ici...',
+                                          tabsize: 2,
+                                          height: 300
+                                        });
+                                    </script>
+                                </div>
+                                <br />
+                                <!-- Submit Button-->
+                                <button class="btn btn-primary text-uppercase disabled" id="submitButton" type="submit">Envoyer</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Footer-->
+        <%- include('../layout/footer.ejs') %>
+        <!-- Bootstrap core JS-->
+        <!-- Core theme JS-->
+        <%- include('../layout/script.ejs') %>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
+    </body>
+</html>
