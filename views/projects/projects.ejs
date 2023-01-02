@@ -33,7 +33,7 @@
                                         </a>
                                         <p class="post-meta">
                                             Posted by
-                                            <a href="/users/account"><%= projectsPosts[i].userId.username %></a>
+                                            <a href="/users/<%= projectsPosts[i].userId._id %>"><%= projectsPosts[i].userId.username %></a>
                                             <%= projectsPosts[i].postDate.toDateString() %>
                                         </p>
                                     </div>

@@ -14,7 +14,7 @@
                             <h3><%= courses.title %></h3>
                             <p>
                                 Posted by
-                                <a href="/users/account" style="color: white;"><%= courses.userId.username %></a>
+                                <a href="/users/<%= courses.userId._id %>" style="color: white;"><%= courses.userId.username %></a>
                                 <%= courses.postDate.toDateString() %>
                             </p>
                         </div>

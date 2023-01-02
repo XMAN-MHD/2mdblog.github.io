@@ -14,7 +14,7 @@
                             <h3><%= projects.title %></h3>
                             <p>
                                 Posted by
-                                <a href="/users/account" style="color: white;"><%= projects.userId.username %></a>
+                                <a href="/users/<%= projects.userId._id %>" style="color: white;"><%= projects.userId.username %></a>
                                 <%= projects.postDate.toDateString() %>
                             </p>
                         </div>

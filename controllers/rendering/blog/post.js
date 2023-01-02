@@ -7,7 +7,7 @@
         controller
     */ 
     const home = async (req, res) => {
-        const posts = await PostModel.findById(req.params.id).populate('userId');
+        const posts = await PostModel.findById(req.params.id).populate({path:'userId', select:['_id', 'username']});
         res.render(
             'blog/post', 
             {

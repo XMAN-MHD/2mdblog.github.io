@@ -14,7 +14,7 @@
                             <h3><%= posts.title %></h3>
                             <p>
                                 Posted by
-                                <a href="/users/account" style="color: white;"><%= posts.userId.username %></a>
+                                <a href="/users/<%= posts.userId._id %>" style="color: white;"><%= posts.userId.username %></a>
                                 <%= posts.postDate.toDateString() %>
                             </p>
                         </div>

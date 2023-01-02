@@ -7,7 +7,7 @@
         controller
     */ 
     const renderCourse = async (req, res) => {
-        const courses = await CoursesPostModel.findById(req.params.id).populate('userId');
+        const courses = await CoursesPostModel.findById(req.params.id).populate({path:'userId', select:['_id', 'username']});
         res.render(
             'courses/course', 
             {
