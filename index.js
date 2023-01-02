@@ -36,6 +36,7 @@ const storeProjectController = require('./controllers/storing/projects/project')
 const getPostController = require('./controllers/rendering/blog/post');
 const renderCourseController = require('./controllers/rendering/courses/course');
 const renderProjectController = require('./controllers/rendering/projects/project');
+const renderRequestedUserController = require('./controllers/rendering/users/requestedUser');
     //custom middlewares 
 const checkEmptyRegistrationFieldsMiddleware = require('./middlewares/users/checkEmptyRegistrationFields'); 
 const checkEmptyLoginFieldsMiddleware = require('./middlewares/users/checkEmptyLoginFields'); 
@@ -128,6 +129,7 @@ app.get('/projets', renderProjectsController);
 app.get('/users/account', userController);
 app.get('/users/logout', logoutUserController);
 app.get('/users/2md', renderUser2mdController);
+app.get('/users/:user', renderRequestedUserController);
 app.get('/posts/:id', getPostController);
 app.get('/projets/:id', renderProjectController);
 app.get('/courses/:id', renderCourseController);

@@ -30,7 +30,7 @@
                       Nous croyons qu'avec dévouement et les bons outils, n'importe qui peut apprendre à coder et à construire ses propres sites web. Nous vous remercions de vous joindre à nous dans ce voyage et espérons vous voir réussir dans vos objectifs de développement web !
                       <figure>
                         <img src="/assets/img/2md.jpg" class="rounded w-25" alt="...">
-                        <figcaption class="mt-2"><a href="#"><small class="fs-6">2MD</small></a></figcaption>
+                        <figcaption class="mt-2"><small class="fs-6">2MD</small></figcaption>
                       </figure>
                     </p>
                 <div class="col-md-10 col-lg-8 col-xl-7">
@@ -46,7 +46,7 @@
                                         </a>
                                         <p class="post-meta">
                                             Posted by
-                                            <a href="/users/account"><%= posts[i].userId.username %></a>
+                                            <a href="/users/<%= posts[i].userId._id %>"><%= posts[i].userId.username %></a>
                                             <%= posts[i].postDate.toDateString() %>
                                         </p>
                                     </div>

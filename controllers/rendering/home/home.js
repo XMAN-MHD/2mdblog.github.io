@@ -7,7 +7,7 @@ const PostModel = require('../../../models/blog/BlogPost');
     controller
 */ 
 const home = async (req, res) => {
-    const posts = await PostModel.find({}).populate('userId');
+    const posts = await PostModel.find({}).populate({path:'userId', select:['_id', 'username']});
     res.render(
         'home/home.ejs', 
         {
