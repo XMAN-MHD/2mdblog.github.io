@@ -4,29 +4,21 @@
     const items = document.querySelectorAll('#items li');
     // Define the items to display per page
     const itemsPerPage = 5;
+    // Calculate the number of pages based on the number of items
+    let numberOfPages = Math.ceil(items.length / itemsPerPage);
     // Define the page to show by default
     let currentPage = 1;
     // Store the button controls html
     let prevButton = '';
     let pageButtons = '';
     let nextButton = '';
-    // Store the number of pages of the pagination
-    let numberOfPages = null;
     // current page's button
     let currentPageButton=null;
     // Create the pagination
     function createPagination() 
     {
-        // Calculate the number of pages based on the number of items
-        numberOfPages = Math.ceil(items.length / itemsPerPage);
-        // remove prev and next button if no items
-        if(numberOfPages ==0)
-        {
-            document.querySelector('#prevButton').innerHTML='';   
-            document.querySelector('#nextButton').innerHTML='';   
-        }
         // Create the button controls of the pagination and showing all of them
-        else if (numberOfPages <= 5) 
+        if (numberOfPages <= 5) 
         {
             // Add "prev" button
             prevButton = `<button class="pagination-button" id="prev-button">prev</button>`;
@@ -260,10 +252,13 @@
         
     }
     // Create the pagination
-    createPagination();
+    if (numberOfPages > 1)
+    {
+        createPagination();
+    }
     // Get current page's button and highlight it  by changing the background color
     currentPageButton = document.querySelector('#button-one');
-    if (currentPageButton === document.querySelector('#button-one')) 
+    if (currentPageButton === document.querySelector('#button-one') && currentPageButton !== null) 
     {
         currentPageButton.style.backgroundColor = '#0085A1';
     }

@@ -17,6 +17,7 @@ const expressSession = require('express-session');
 const UserModel = require('./models/users/User');
     //controllers 
 const homeController = require('./controllers/rendering/home/home');
+const RenderSearchedBlogPostController = require('./controllers/rendering/home/searchBlogPost');
 const contactezMoiController = require('./controllers/rendering/users/contactezMoi');
 const authLoginController = require('./controllers/rendering/users/authLogin');
 const newUserController = require('./controllers/rendering/users/newUser');
@@ -118,6 +119,7 @@ app.use(
     handle get request
 */ 
 app.get('/', homeController);
+app.get('/search', RenderSearchedBlogPostController);
 app.get('/contacte', contactezMoiController);
 app.get('/auth/login', authLoginController);
 app.get('/auth/register', newUserController);

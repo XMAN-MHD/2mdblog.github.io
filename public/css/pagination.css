@@ -11,6 +11,7 @@
 }
 #pageButtons button
 {
+    margin-top: 10px;
     width: 50px; 
     outline: white;
     border-color: white; 
@@ -25,6 +26,7 @@
 }
 #prevButton button
 {
+    margin-top: 10px;
     outline: white;
     border-color: white; 
     background-color: black;
@@ -32,6 +34,7 @@
 }
 #nextButton button
 {
+    margin-top: 10px;
     outline: white;
     border-color: white; 
     background-color: black;

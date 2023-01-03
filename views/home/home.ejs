@@ -21,9 +21,9 @@
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
-                  <!-- Welcome Text -->
-                  <h1 class="text-center">Bienvenue sur notre Blog !</h1>
-                  <p class="text-start text-wrap mt-3">
+                <!-- Welcome Text -->
+                <h1 class="my-5">Bienvenue sur notre Blog !</h1>
+                <p class="text-start text-wrap mt-3">
                       Nous sommes passionnés par le développement web et croyons que c'est une compétence précieuse dans le monde d'aujourd'hui. 
                       Dans ce blog, nous partagerons des conseils et des ressources pour vous aider à apprendre le développement web de manière réussie.
                       Que vous soyez un débutant complet ou que vous ayez déjà une certaine expérience, nous avons quelque chose pour tout le monde. De l'apprentissage des bases de HTML et CSS jusqu'à la plongée dans des sujets plus avancés tels que JavaScript et la programmation côté serveur, nous fournirons un soutien et une guidance à chaque étape du parcours.
@@ -32,9 +32,12 @@
                         <img src="/assets/img/2md.jpg" class="rounded w-25" alt="...">
                         <figcaption class="mt-2"><small class="fs-6">2MD</small></figcaption>
                       </figure>
-                    </p>
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                  
+                </p>
+                <h1 class="mt-3 mb-5">Les Articles  du Blog</h1>
+                <!-- Search Bar -->
+                <%- include('../layout/searchBar.ejs') %>
+                <!-- Blog posts -->
+                <div class="col-md-10 col-lg-8 col-xl-7  my-5">
                     <% if( (posts !== null) && (posts.length > 0) ) { %>
                         <ul id="items">
                             <% for(var i = posts.length - 1; i >= 0; i--) { %>
@@ -62,6 +65,10 @@
                     <div id="pageButtons"></div>
                     <div id="nextButton"></div>
                 </div> 
+                <% if(searching) { %>
+                    <!-- All the blog posts-->
+                    <div class="d-flex justify-content-end y-4"><a class="btn btn-primary text-uppercase" href="/">Voir tous</a></div>
+                <% } %>
             </div>
         </div>
         <!-- Footer-->
