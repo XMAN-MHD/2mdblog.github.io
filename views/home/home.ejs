@@ -37,24 +37,22 @@
                 <!-- Search Bar -->
                 <%- include('../layout/searchBar.ejs') %>
                 <!-- Blog posts -->
-                <div class="col-md-10 col-lg-8 col-xl-7  my-5">
+                <div class="my-5">
                     <% if( (posts !== null) && (posts.length > 0) ) { %>
-                        <ul id="items">
+                        <ul id="items" class="list-group">
                             <% for(var i = posts.length - 1; i >= 0; i--) { %>
-                                <li>
+                                <li class="list-group-item">
                                     <!-- Post preview-->
                                     <div class="post-preview">
                                         <a href="posts/<%= posts[i]._id %>">
-                                            <h2 class="post-title"><%= posts[i].title %></h2>
+                                            <h5><%= posts[i].title %></h5>
                                         </a>
                                         <p class="post-meta">
-                                            Posted by
+                                            Posté par
                                             <a href="/users/<%= posts[i].userId._id %>"><%= posts[i].userId.username %></a>
                                             <%= posts[i].postDate.toDateString() %>
                                         </p>
                                     </div>
-                                    <!-- Divider-->
-                                    <hr class="my-4" />
                                 </li>
                             <% } %>
                         </ul>

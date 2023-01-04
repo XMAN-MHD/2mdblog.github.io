@@ -34,6 +34,7 @@ const logoutUserController = require('./controllers/logics/users/logoutUser');
 const storePostController = require('./controllers/storing/blog/post');
 const storeCourseController = require('./controllers/storing/courses/course');
 const storeProjectController = require('./controllers/storing/projects/project');
+const storeBlogPostCommentController = require('./controllers/storing/blog/blogPostComment');
 const getPostController = require('./controllers/rendering/blog/post');
 const renderCourseController = require('./controllers/rendering/courses/course');
 const renderProjectController = require('./controllers/rendering/projects/project');
@@ -91,10 +92,11 @@ app.use("/users/login", checkEmptyLoginFieldsMiddleware);
 app.use(expressSession({secret: 'keyboard cat'}));  
     // custum middleware to prevent an authentificated use to log in or to register 
 app.use('/auth/register', keepUsersOutMiddleware);    
-    // custum middleware to prevent visitors to connect, to publish and to log out 
+    // custum middleware to prevent visitors to connect, to publish, to comment and to log out 
 app.use('/posts/new', keepVisitorsOutMiddleware);
 app.use('/users/logout', keepVisitorsOutMiddleware);
 app.use('/users/account', keepVisitorsOutMiddleware);
+app.use('/posts/:id/comments/new', keepVisitorsOutMiddleware);
     // custom middleware allow the front-end to know whether the user has a session or not 
 app.use(
     '*',
@@ -142,6 +144,7 @@ app.get('/courses/:id', renderCourseController);
 app.post('/users/new', storeUserController); 
 app.post('/users/login', userLoginController); 
 app.post('/posts/store', storePostController);
+app.post('/posts/:id/comments/new', storeBlogPostCommentController);
 app.post('/courses/store', storeCourseController);
 app.post('/projets/store', storeProjectController);
 

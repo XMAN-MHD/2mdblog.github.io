@@ -16,7 +16,6 @@ const storeUser = (req, res) => {
         path.resolve(__dirname, '../../../public/assets/img/', imageHandler.name), 
         async (e) => {
             if (e) {
-                console.error(e)
                 return res.redirect('/auth/regester')
             }
             await UserModel.create(

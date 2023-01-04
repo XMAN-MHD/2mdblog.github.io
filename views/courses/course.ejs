@@ -11,9 +11,9 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h3><%= courses.title %></h3>
+                            <h5><%= courses.title %></h5>
                             <p>
-                                Posted by
+                                Posté par
                                 <a href="/users/<%= courses.userId._id %>" style="color: white;"><%= courses.userId.username %></a>
                                 <%= courses.postDate.toDateString() %>
                             </p>

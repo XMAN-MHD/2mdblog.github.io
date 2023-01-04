@@ -26,13 +26,13 @@
                         <ul id="items">
                             <% for(var i = projectsPosts.length - 1; i >= 0; i--) { %>
                                 <li>
-                                    <!-- Post preview-->
+                                    <!--Post preview-->
                                     <div class="post-preview">
                                         <a href="projets/<%= projectsPosts[i]._id %>">
-                                            <h2 class="post-title"><%= projectsPosts[i].title %></h2>
+                                            <h5><%= projectsPosts[i].title %></h5>
                                         </a>
                                         <p class="post-meta">
-                                            Posted by
+                                            Posté par
                                             <a href="/users/<%= projectsPosts[i].userId._id %>"><%= projectsPosts[i].userId.username %></a>
                                             <%= projectsPosts[i].postDate.toDateString() %>
                                         </p>

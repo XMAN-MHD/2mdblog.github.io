@@ -21,7 +21,7 @@
         if (numberOfPages <= 5) 
         {
             // Add "prev" button
-            prevButton = `<button class="pagination-button" id="prev-button">prev</button>`;
+            prevButton = `<button class="pagination-button" id="prev-button">&laquo;</button>`;
             // Add page buttons
             for (let i = 1; i <= numberOfPages; i++) 
             {
@@ -35,13 +35,13 @@
                 }
             }
             // Add "next" button
-            nextButton = `<button class="pagination-button" id="next-button">next</button>`;
+            nextButton = `<button class="pagination-button" id="next-button">&raquo;</button>`;
         }
         // show just some of the pagination button controls 
         else 
         {
             // Add "prev" button
-            prevButton = `<button class="pagination-button" id="prev-button">prev</button>`;
+            prevButton = `<button class="pagination-button" id="prev-button">&laquo;</button>`;
             // Add page buttons
             for (let i = 1; i <= numberOfPages; i++) 
             {
@@ -66,7 +66,7 @@
                 }
             }
             // Add "next" button
-            nextButton = `<button class="pagination-button" id="next-button">next</button>`;
+            nextButton = `<button class="pagination-button" id="next-button">&raquo;</button>`;
         }
         // Render the pagination button controls
         document.querySelector('#prevButton').innerHTML = prevButton;

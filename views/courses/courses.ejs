@@ -29,10 +29,10 @@
                                     <!-- Post preview-->
                                     <div class="post-preview">
                                         <a href="courses/<%= coursesPosts[i]._id %>">
-                                            <h2 class="post-title"><%= coursesPosts[i].title %></h2>
+                                            <h5><%= coursesPosts[i].title %></h5>
                                         </a>
                                         <p class="post-meta">
-                                            Posted by
+                                            Posté par
                                             <a href="/users/<%= coursesPosts[i].userId._id %>"><%= coursesPosts[i].userId.username %></a>
                                             <%= coursesPosts[i].postDate.toDateString() %>
                                         </p>
