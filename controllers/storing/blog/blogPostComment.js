@@ -1,7 +1,7 @@
 /*
    module references 
 */
-    // post model
+    // models
 const BlogPostModel = require('../../../models/blog/BlogPost');
 const UserModel = require('../../../models/users/User');
 

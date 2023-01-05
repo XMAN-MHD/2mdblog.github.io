@@ -10,6 +10,7 @@ const ProjectsPostSchema = new mongoose.Schema({
     title: { type: String, required: true },
     message: { type: String, required: true },
     postImage: { type: String, required: true },
+    comments: [ { authorId: mongoose.Schema.Types.ObjectId, author: String, body: String, dateOfComment:{ type: Date, default: new Date() } } ],
     userId: {type: mongoose.Schema.Types.ObjectId, ref: UserModel, required: true}, 
     postDate: { type: Date, default: new Date() }
 })

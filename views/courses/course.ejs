@@ -25,15 +25,38 @@
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
              <!-- Post Content-->
-             <article class="mb-4">
-                <div class="container px-4 px-lg-5">
-                    <div class="row gx-4 gx-lg-5 justify-content-center">
-                        <div class="col-md-10 col-lg-8 col-xl-7">
-                            <%- courses.message %>
-                        </div>
-                    </div>
-                </div>
+             <article class="container px-4 px-lg-5 mobile-text">
+                <%- courses.message %>
             </article>
+            <!-- Send a new comment -->
+            <div class="container px-4 px-lg-5">
+                <% if(!loggedIn) {%>
+                    <p class="text-custom-color text-center" style="color: red">Connectez-vous pour laisser un commentaire</p>
+                <% }%>
+                <h6>Laisser un commentaire</h6>
+                <form action="/courses/<%= courses._id %>/comments/new" method="POST">
+                    <div class="form-group mb-4">
+                        <textarea name="body" class="form-control w-100" rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </form>
+            </div>
+            <!-- Display the Comments -->
+            <div class="container px-4 px-lg-5 my-5">
+                <h6>Commentaires</h6>
+                <ul class="list-group mb-3">
+                    <% for(var i = 0; i < courses.comments.length; i++) { %>
+                        <li class="list-group-item">
+                            <p>
+                                <a href="/users/<%= courses.comments[i].authorId %>" class="text-decoration-underline"><%= courses.comments[i].author %></a>
+                                <br>
+                                <%= courses.comments[i].body %>
+                            </p>  
+                            <span class="text-muted fs-6"><%= courses.comments[i].dateOfComment.toLocaleDateString() %></span>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
         </div>
         <!-- Footer-->
         <%- include('../layout/footer.ejs') %>

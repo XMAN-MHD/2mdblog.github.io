@@ -35,6 +35,8 @@ const storePostController = require('./controllers/storing/blog/post');
 const storeCourseController = require('./controllers/storing/courses/course');
 const storeProjectController = require('./controllers/storing/projects/project');
 const storeBlogPostCommentController = require('./controllers/storing/blog/blogPostComment');
+const storeCoursesPostCommentController = require('./controllers/storing/courses/coursesPostComment');
+const storeProjectsPostCommentController = require('./controllers/storing/projects/projectsPostComment');
 const getPostController = require('./controllers/rendering/blog/post');
 const renderCourseController = require('./controllers/rendering/courses/course');
 const renderProjectController = require('./controllers/rendering/projects/project');
@@ -145,6 +147,8 @@ app.post('/users/new', storeUserController);
 app.post('/users/login', userLoginController); 
 app.post('/posts/store', storePostController);
 app.post('/posts/:id/comments/new', storeBlogPostCommentController);
+app.post('/courses/:id/comments/new', storeCoursesPostCommentController);
+app.post('/projects/:id/comments/new', storeProjectsPostCommentController);
 app.post('/courses/store', storeCourseController);
 app.post('/projets/store', storeProjectController);
 

@@ -24,7 +24,7 @@
                 <!-- Welcome Text -->
                 <h1 class="mt-5">Bienvenue sur notre Blog !</h1>                                                            
                 <div class="mt-2 mobile-text">
-                    <p style="text-align: justify;">
+                    <p>
                         Nous sommes passionnés par le développement web et croyons que c'est une compétence précieuse dans le monde d'aujourd'hui. 
                         Dans ce blog, nous partagerons des conseils et des ressources pour vous aider à apprendre le développement web de manière réussie.
                         Que vous soyez un débutant complet ou que vous ayez déjà une certaine expérience, nous avons quelque chose pour tout le monde. De l'apprentissage des bases de HTML et CSS jusqu'à la plongée dans des sujets plus avancés tels que JavaScript et la programmation côté serveur, nous fournirons un soutien et une guidance à chaque étape du parcours.
@@ -42,13 +42,13 @@
                 <!-- Blog posts -->
                 <div class="my-5">
                     <% if( (posts !== null) && (posts.length > 0) ) { %>
-                        <ul id="items" class="list-group">
+                        <ul id="items" class="list-group" >
                             <% for(var i = posts.length - 1; i >= 0; i--) { %>
                                 <li class="list-group-item">
                                     <!-- Post preview-->
-                                    <div class="post-preview">
+                                    <div class="post-preview" style="min-height: 150px;">
                                         <a href="posts/<%= posts[i]._id %>">
-                                            <h5><%= posts[i].title %></h5>
+                                            <h6><%= posts[i].title %></h6>
                                         </a>
                                         <p class="post-meta">
                                             Posté par
