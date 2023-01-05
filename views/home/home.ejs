@@ -22,17 +22,20 @@
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <!-- Welcome Text -->
-                <h1 class="my-5">Bienvenue sur notre Blog !</h1>
-                <p class="text-start text-wrap mt-3">
-                      Nous sommes passionnés par le développement web et croyons que c'est une compétence précieuse dans le monde d'aujourd'hui. 
-                      Dans ce blog, nous partagerons des conseils et des ressources pour vous aider à apprendre le développement web de manière réussie.
-                      Que vous soyez un débutant complet ou que vous ayez déjà une certaine expérience, nous avons quelque chose pour tout le monde. De l'apprentissage des bases de HTML et CSS jusqu'à la plongée dans des sujets plus avancés tels que JavaScript et la programmation côté serveur, nous fournirons un soutien et une guidance à chaque étape du parcours.
-                      Nous croyons qu'avec dévouement et les bons outils, n'importe qui peut apprendre à coder et à construire ses propres sites web. Nous vous remercions de vous joindre à nous dans ce voyage et espérons vous voir réussir dans vos objectifs de développement web !
-                      <figure>
+                <h1 class="mt-5">Bienvenue sur notre Blog !</h1>                                                            
+                <div class="mt-2 mobile-text">
+                    <p style="text-align: justify;">
+                        Nous sommes passionnés par le développement web et croyons que c'est une compétence précieuse dans le monde d'aujourd'hui. 
+                        Dans ce blog, nous partagerons des conseils et des ressources pour vous aider à apprendre le développement web de manière réussie.
+                        Que vous soyez un débutant complet ou que vous ayez déjà une certaine expérience, nous avons quelque chose pour tout le monde. De l'apprentissage des bases de HTML et CSS jusqu'à la plongée dans des sujets plus avancés tels que JavaScript et la programmation côté serveur, nous fournirons un soutien et une guidance à chaque étape du parcours.
+                        Nous croyons qu'avec dévouement et les bons outils, n'importe qui peut apprendre à coder et à construire ses propres sites web. 
+                        Nous vous remercions de vous joindre à nous dans ce voyage et espérons vous voir réussir dans vos objectifs de développement web !
+                    </p>
+                    <figure>
                         <img src="/assets/img/2md.jpg" class="rounded w-25" alt="...">
                         <figcaption class="mt-2"><small class="fs-6">2MD</small></figcaption>
-                      </figure>
-                </p>
+                    </figure>
+                </div>
                 <h1 class="mt-3 mb-5">Les Articles  du Blog</h1>
                 <!-- Search Bar -->
                 <%- include('../layout/searchBar.ejs') %>
@@ -58,14 +61,37 @@
                         </ul>
                     <% } %>
                 </div>
-                <div id="pagination">
+                <!-- pagination -->
+                <div id="pagination" class="mb-3">
                     <div id="prevButton"></div>
                     <div id="pageButtons"></div>
                     <div id="nextButton"></div>
                 </div> 
                 <% if(searching) { %>
-                    <!-- All the blog posts-->
-                    <div class="d-flex justify-content-end y-4"><a class="btn btn-primary text-uppercase" href="/">Voir tous</a></div>
+                    <!-- Click the button show all the blog posts-->
+                    <div class="d-flex justify-content-end y-4 mb-3"><a class="btn btn-primary text-uppercase" href="/">Voir tous</a></div>
+                <% } %>
+                <!-- the comments on the recent posts -->
+                <% if( (posts !== null) && (posts.length > 0) ) { %>
+                <div>
+                    <h6 style="margin: 20px 0;">Les commentaires sur les articles récents</h6>
+                        <ul class="list-group">
+                            <% for(var j = posts.length - 1; j > posts.length - 6; j--) { %>
+                                <!-- comments-->
+                                <% if( (posts[j].comments !== null) && (posts[j].comments.length > 0) ) { %>
+                                <li class="list-group-item">
+                                        <h5><%= posts[j].title %></h5>
+                                        <p>
+                                            <a href="/users/<%= posts[j].comments[0].authorId %>" class="text-decoration-underline"><%= posts[j].comments[0].author %></a>
+                                            <br>
+                                            <%= posts[j].comments[0].body %>
+                                        </p>  
+                                        <span class="text-muted fs-6"><%= posts[j].comments[0].dateOfComment.toLocaleDateString() %></span>
+                                </li>
+                                <% } %>
+                            <% } %>
+                        </ul>
+                </div>
                 <% } %>
             </div>
         </div>

@@ -10,7 +10,6 @@ const searchBlogPosts = async (req, res) => {
       $diacriticSensitive: false 
     }
   }).populate({path:'userId', select:['_id', 'username']});
-  console.log(posts);
   res.render(
     'home/home.ejs',
     {
