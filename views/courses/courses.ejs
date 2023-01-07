@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <!-- head -->
     <%- include('../layout/head.ejs') %>
     <body>
@@ -22,29 +22,27 @@
         <div class="container px-4 px-lg-5">
             <!-- container -->
             <div class="container px-4 px-lg-5">
-                 <!-- texte -->
-                 <p class="mobile-text">
-                    Êtes-vous prêt à faire progresser votre carrière avec des compétences en développement web ? 2MD est le choix idéal pour des cours en ligne de qualité enseignés par un enseignant talentueux et un développeur web expérimenté. Avec 2MD, vous aurez le soutien et les conseils nécessaires pour réussir dans le domaine concurrentiel du développement web. N'attendez plus pour investir dans votre avenir - inscrivez-vous aux cours de 2MD dès maintenant !    
-                </p>
-                <!-- course's posts -->
                 <div>
+                    <!-- texte -->
+                    <p class="mobile-text">
+                        Êtes-vous prêt à faire progresser votre carrière avec des compétences en développement web ? 2MD est le choix idéal pour des cours en ligne de qualité enseignés par un enseignant talentueux et un développeur web expérimenté. Avec 2MD, vous aurez le soutien et les conseils nécessaires pour réussir dans le domaine concurrentiel du développement web. N'attendez plus pour investir dans votre avenir - inscrivez-vous aux cours de 2MD dès maintenant !    
+                    </p>
+                    <!-- posts -->
                     <% if( (coursesPosts !== null) && (coursesPosts.length > 0) ) { %>
-                        <ul id="items">
+                        <ul id="items" class="list-group">
                             <% for(var i = coursesPosts.length - 1; i >= 0; i--) { %>
-                                <li>
+                                <li class="list-group-item">
                                     <!-- Post preview-->
-                                    <div class="post-preview">
+                                    <div style="min-height: 150px;">
                                         <a href="courses/<%= coursesPosts[i]._id %>">
                                             <h5><%= coursesPosts[i].title %></h5>
                                         </a>
-                                        <p class="post-meta">
+                                        <p class="text-muted">
                                             Posté par
                                             <a href="/users/<%= coursesPosts[i].userId._id %>"><%= coursesPosts[i].userId.username %></a>
                                             <%= coursesPosts[i].postDate.toDateString() %>
                                         </p>
                                     </div>
-                                    <!-- Divider-->
-                                    <hr class="my-4" />
                                 </li>
                             <% } %>
                         </ul>

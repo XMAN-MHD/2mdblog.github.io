@@ -16,7 +16,7 @@ const storePost = (req, res) => {
          path.resolve(__dirname, '../../../public/assets/img/', imageHandler.name), 
          async (e) => {
              if (e) {
-                console.error(e);
+                ;
                 return res.redirect('/posts/new')
              }
              await PostModel.create(
@@ -24,12 +24,11 @@ const storePost = (req, res) => {
                  (e, user) => {
                      if(e) 
                      {
-                        console.error(e);
+                        
                         return res.redirect('/posts/new')
                      }
                      else
                      {
-                        console.error(e);
                         return res.redirect('/')
                      } 
                  } 

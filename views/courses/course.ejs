@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <!-- head -->
     <%- include('../layout/head.ejs') %>
     <body>
         <!-- Navigation-->
         <%- include('../layout/navBar.ejs') %>
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('<%= courses.postImage %>')">
+        <header class="masthead" style="background-image: url('<%= course.postImage %>')">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h5><%= courses.title %></h5>
+                            <h5><%= course.title %></h5>
                             <p>
                                 Posté par
-                                <a href="/users/<%= courses.userId._id %>" style="color: white;"><%= courses.userId.username %></a>
-                                <%= courses.postDate.toDateString() %>
+                                <a href="/users/<%= course.userId._id %>" style="color: white;"><%= course.userId.username %></a>
+                                <%= course.postDate.toDateString() %>
                             </p>
                         </div>
                     </div>
@@ -24,9 +24,20 @@
         </header>
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
-             <!-- Post Content-->
              <article class="container px-4 px-lg-5 mobile-text">
-                <%- courses.message %>
+                <!-- delete and update links -->
+                <% if(deletePost) {%>
+                    <p class="text-end">
+                        <a href="/courses/<%= course._id %>/update" class="btn btn-warning text-uppercase text-decoration-none">
+                            Modifier
+                        </a>
+                        <a href="/courses/<%= course._id %>/delete" class="btn btn-danger text-uppercase text-decoration-none">
+                            Supprimer
+                        </a>
+                    </p>
+                <% }%>
+                <!-- Post Content-->
+                <%- course.message %>
             </article>
             <!-- Send a new comment -->
             <div class="container px-4 px-lg-5">
@@ -34,7 +45,7 @@
                     <p class="text-custom-color text-center" style="color: red">Connectez-vous pour laisser un commentaire</p>
                 <% }%>
                 <h6>Laisser un commentaire</h6>
-                <form action="/courses/<%= courses._id %>/comments/new" method="POST">
+                <form action="/courses/<%= course._id %>/comments/new" method="POST">
                     <div class="form-group mb-4">
                         <textarea name="body" class="form-control w-100" rows="5"></textarea>
                     </div>
@@ -45,14 +56,14 @@
             <div class="container px-4 px-lg-5 my-5">
                 <h6>Commentaires</h6>
                 <ul class="list-group mb-3">
-                    <% for(var i = 0; i < courses.comments.length; i++) { %>
+                    <% for(var i = 0; i < course.comments.length; i++) { %>
                         <li class="list-group-item">
                             <p>
-                                <a href="/users/<%= courses.comments[i].authorId %>" class="text-decoration-underline"><%= courses.comments[i].author %></a>
+                                <a href="/users/<%= course.comments[i].authorId %>" class="text-decoration-underline"><%= course.comments[i].author %></a>
                                 <br>
-                                <%= courses.comments[i].body %>
+                                <%= course.comments[i].body %>
                             </p>  
-                            <span class="text-muted fs-6"><%= courses.comments[i].dateOfComment.toLocaleDateString() %></span>
+                            <span class="text-muted fs-6"><%= course.comments[i].dateOfComment.toLocaleDateString() %></span>
                         </li>
                     <% } %>
                 </ul>

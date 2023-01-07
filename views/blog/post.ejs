@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <!-- head -->
         <%- include('../layout/head.ejs') %>
     <!-- body -->
@@ -7,16 +7,16 @@
         <!-- Navigation-->
             <%- include('../layout/navBar.ejs') %>
         <!-- Header-->
-            <header class="masthead" style="background-image: url('<%= posts.postImage %>')">
+            <header class="masthead" style="background-image: url('<%= post.postImage %>')">
                 <div class="container position-relative px-4 px-lg-5">
                     <div class="row gx-4 gx-lg-5 justify-content-center">
                         <div class="col-md-10 col-lg-8 col-xl-7">
                             <div class="site-heading">
-                                <h5><%= posts.title %></h5>
+                                <h5><%= post.title %></h5>
                                 <p>
                                     Posté par
-                                    <a href="/users/<%= posts.userId._id %>" style="color: white;"><%= posts.userId.username %></a>
-                                    <%= posts.postDate.toDateString() %>
+                                    <a href="/users/<%= post.userId._id %>" style="color: white;"><%= post.userId.username %></a>
+                                    <%= post.postDate.toDateString() %>
                                 </p>
                             </div>
                         </div>
@@ -25,9 +25,21 @@
             </header>
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
-             <!-- Post Content-->
+            <!-- Post Content-->
                <article class="container px-4 px-lg-5 text-break mobile-text">
-                    <%- posts.message %>
+                <!-- delete and update links -->
+                    <% if(deletePost) {%>
+                    <p class="text-end">
+                        <a href="/posts/<%= post._id %>/update" class="btn btn-warning text-uppercase text-decoration-none">
+                            Modifier
+                        </a>
+                        <a href="/posts/<%= post._id %>/delete" class="btn btn-danger text-uppercase text-decoration-none">
+                            Supprimer
+                        </a>
+                    </p>
+                    <% }%>
+                <!-- body of the post -->
+                    <%- post.message %>
                 </article>
             <!-- Send a new comment -->
                 <div class="container px-4 px-lg-5">
@@ -35,7 +47,7 @@
                         <p class="text-custom-color text-center" style="color: red">Connectez-vous pour laisser un commentaire</p>
                     <% }%>
                     <h6>Laisser un commentaire</h6>
-                    <form action="/posts/<%= posts._id %>/comments/new" method="POST">
+                    <form action="/posts/<%= post._id %>/comments/new" method="POST">
                         <div class="form-group mb-4">
                             <textarea name="body" class="form-control w-100" rows="5"></textarea>
                         </div>
@@ -46,14 +58,14 @@
                 <div class="container px-4 px-lg-5 my-5">
                     <h6>Commentaires</h6>
                     <ul class="list-group mb-3">
-                        <% for(var i = 0; i < posts.comments.length; i++) { %>
+                        <% for(var i = 0; i < post.comments.length; i++) { %>
                             <li class="list-group-item">
                                 <p>
-                                    <a href="/users/<%= posts.comments[i].authorId %>" class="text-decoration-underline"><%= posts.comments[i].author %></a>
+                                    <a href="/users/<%= post.comments[i].authorId %>" class="text-decoration-underline"><%= post.comments[i].author %></a>
                                     <br>
-                                    <%= posts.comments[i].body %>
+                                    <%= post.comments[i].body %>
                                 </p>  
-                                <span class="text-muted fs-6"><%= posts.comments[i].dateOfComment.toLocaleDateString() %></span>
+                                <span class="text-muted fs-6"><%= post.comments[i].dateOfComment.toLocaleDateString() %></span>
                             </li>
                         <% } %>
                     </ul>

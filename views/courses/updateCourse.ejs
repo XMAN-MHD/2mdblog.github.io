@@ -38,21 +38,21 @@
                             <!-- To make this form functional, sign up at-->
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
-                            <form id="contactForm" method="POST" action="/courses/store" enctype="multipart/form-data">
+                            <form id="contactForm" method="POST" action="/courses/<%= postToUpdate._id %>/save" enctype="multipart/form-data">
+                                <p class="text-danger">NB: Impossible de modifier l'article si le texte contient des images ou vidéos</p>
                                 <div class="form-floating">
-                                    <input name="title" class="form-control" id="title" type="text" placeholder="saisir votre titre..." />
+                                    <input name="title" value="<%= postToUpdate.title %>" class="form-control" id="title" type="text" placeholder="saisir votre titre..." />
                                     <label for="title">Titre</label>
                                 </div>
                                 <br><br>
                                 <div class="form-floating">
                                     <textarea name="message" class="form-control" id="message" placeholder="saisir votre message ici..." style="height: 12rem" ></textarea>
                                     <script>
-                                        $('#message').summernote({
-                                          placeholder: 'saisir votre message ici...',
-                                          tabsize: 2,
-                                          height: 300
-                                        });
-                                    </script>
+                                        $('#message').summernote(
+                                            'code', 
+                                            '<%- postToUpdate.message %>'
+                                        );
+                                    </script> 
                                 </div>
                                 <br />
                                 <div class="form-floating">

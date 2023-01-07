@@ -16,31 +16,37 @@ const expressSession = require('express-session');
     // user model
 const UserModel = require('./models/users/User');
     //controllers 
-const homeController = require('./controllers/rendering/home/home');
-const RenderSearchedBlogPostController = require('./controllers/rendering/home/searchBlogPost');
-const contactezMoiController = require('./controllers/rendering/users/contactezMoi');
-const authLoginController = require('./controllers/rendering/users/authLogin');
-const newUserController = require('./controllers/rendering/users/newUser');
-const newPostController = require('./controllers/rendering/blog/newPost');
-const renderNewProjectController = require('./controllers/rendering/projects/newProject');
-const newCourseController = require('./controllers/rendering/courses/newCourse');
-const coursesController = require('./controllers/rendering/courses/courses');
-const renderProjectsController = require('./controllers/rendering/projects/projects');
-const userController = require('./controllers/rendering/users/user');
+const logoutUserController = require('./controllers/getting/users/logoutUser');
+const getPostController = require('./controllers/rendering/blog/post');
+const getUserLoginController = require('./controllers/getting/users/userLogin');
 const storeUserController = require('./controllers/storing/users/user');
-const userLoginController = require('./controllers/logics/users/userLogin');
-const renderUser2mdController = require('./controllers/rendering/users/user2md');
-const logoutUserController = require('./controllers/logics/users/logoutUser');
 const storePostController = require('./controllers/storing/blog/post');
 const storeCourseController = require('./controllers/storing/courses/course');
 const storeProjectController = require('./controllers/storing/projects/project');
 const storeBlogPostCommentController = require('./controllers/storing/blog/blogPostComment');
 const storeCoursesPostCommentController = require('./controllers/storing/courses/coursesPostComment');
 const storeProjectsPostCommentController = require('./controllers/storing/projects/projectsPostComment');
-const getPostController = require('./controllers/rendering/blog/post');
+const renderHomeController = require('./controllers/rendering/home/home');
+const renderContactController = require('./controllers/rendering/users/contactezMoi');
+const renderAuthLoginController = require('./controllers/rendering/users/authLogin');
+const renderAuthRegisterController = require('./controllers/rendering/users/newUser');
+const renderNewPostController = require('./controllers/rendering/blog/newPost');
+const renderNewCourseController = require('./controllers/rendering/courses/newCourse');
+const renderCoursesController = require('./controllers/rendering/courses/courses');
+const renderUserAccountController = require('./controllers/rendering/users/user');
+const renderSearchedBlogPostController = require('./controllers/rendering/home/searchBlogPost');
+const renderProjectsController = require('./controllers/rendering/projects/projects');
+const renderUser2mdController = require('./controllers/rendering/users/user2md');
+const renderNewProjectController = require('./controllers/rendering/projects/newProject');
 const renderCourseController = require('./controllers/rendering/courses/course');
 const renderProjectController = require('./controllers/rendering/projects/project');
 const renderRequestedUserController = require('./controllers/rendering/users/requestedUser');
+const deleteBlogPostController = require('./controllers/deleting/blog/post');
+const deleteCoursesPostController = require('./controllers/deleting/courses/post');
+const updateBlogPostController = require('./controllers/updating/blog/post');
+const updateCoursesPostController = require('./controllers/updating/courses/post');
+const saveUpdatedCoursesPostController = require('./controllers/updating/courses/save');
+const saveUpdatedBlogPostController = require('./controllers/updating/blog/save');
     //custom middlewares 
 const checkEmptyRegistrationFieldsMiddleware = require('./middlewares/users/checkEmptyRegistrationFields'); 
 const checkEmptyLoginFieldsMiddleware = require('./middlewares/users/checkEmptyLoginFields'); 
@@ -122,34 +128,42 @@ app.use(
 /*
     handle get request
 */ 
-app.get('/', homeController);
-app.get('/search', RenderSearchedBlogPostController);
-app.get('/contacte', contactezMoiController);
-app.get('/auth/login', authLoginController);
-app.get('/auth/register', newUserController);
-app.get('/courses/new', newCourseController);
-app.get('/projets/new', renderNewProjectController);
-app.get('/posts/new', newPostController);
-app.get('/courses', coursesController);
-app.get('/projets', renderProjectsController);
-app.get('/users/account', userController);
+app.get('/', renderHomeController);
+app.get('/search', renderSearchedBlogPostController);
+app.get('/contacte', renderContactController);
+app.get('/auth/login', renderAuthLoginController);
+app.get('/auth/register', renderAuthRegisterController);
+app.get('/users/account', renderUserAccountController);
 app.get('/users/logout', logoutUserController);
 app.get('/users/2md', renderUser2mdController);
 app.get('/users/:user', renderRequestedUserController);
-app.get('/posts/:id', getPostController);
+app.get('/projets', renderProjectsController);
+app.get('/projets/new', renderNewProjectController);
 app.get('/projets/:id', renderProjectController);
+app.get('/posts/new', renderNewPostController);
+app.get('/posts/:id', getPostController);
+app.get('/posts/:id/delete', deleteBlogPostController)  
+app.get('/posts/:id/update', updateBlogPostController)
+app.get('/courses', renderCoursesController);
+app.get('/courses/new', renderNewCourseController);
 app.get('/courses/:id', renderCourseController);
-
+app.get('/courses/:id/delete', deleteCoursesPostController) 
+app.get('/courses/:id/update', updateCoursesPostController)
 /*
     handle post request
 */
 app.post('/users/new', storeUserController); 
-app.post('/users/login', userLoginController); 
+app.post('/users/login', getUserLoginController); 
 app.post('/posts/store', storePostController);
 app.post('/posts/:id/comments/new', storeBlogPostCommentController);
-app.post('/courses/:id/comments/new', storeCoursesPostCommentController);
-app.post('/projects/:id/comments/new', storeProjectsPostCommentController);
+app.post('/posts/:id/save', saveUpdatedBlogPostController);
 app.post('/courses/store', storeCourseController);
+app.post('/courses/:id/comments/new', storeCoursesPostCommentController);
+app.post('/courses/:id/save', saveUpdatedCoursesPostController);
 app.post('/projets/store', storeProjectController);
-
+app.post('/projects/:id/comments/new', storeProjectsPostCommentController);
+/*
+    Handle not found request
+*/
+app.use((req, res, next) => {res.render('404/notFound')}) 
 
