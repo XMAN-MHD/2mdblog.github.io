@@ -24,19 +24,19 @@
         </header>
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
+             <!-- delete and update links -->
+             <% if(deletePost) {%>
+                <p class="container px-4 px-lg-5 text-end">
+                    <a href="/courses/<%= course._id %>/update" class="btn btn-warning text-uppercase text-decoration-none">
+                        Modifier
+                    </a>
+                    <a href="/courses/<%= course._id %>/delete" class="btn btn-danger text-uppercase text-decoration-none">
+                        Supprimer
+                    </a>
+                </p>
+            <% }%>
+            <!-- Post Content-->
              <article class="container px-4 px-lg-5 mobile-text">
-                <!-- delete and update links -->
-                <% if(deletePost) {%>
-                    <p class="text-end">
-                        <a href="/courses/<%= course._id %>/update" class="btn btn-warning text-uppercase text-decoration-none">
-                            Modifier
-                        </a>
-                        <a href="/courses/<%= course._id %>/delete" class="btn btn-danger text-uppercase text-decoration-none">
-                            Supprimer
-                        </a>
-                    </p>
-                <% }%>
-                <!-- Post Content-->
                 <%- course.message %>
             </article>
             <!-- Send a new comment -->
@@ -54,8 +54,10 @@
             </div>
             <!-- Display the Comments -->
             <div class="container px-4 px-lg-5 my-5">
+                <!-- title -->
                 <h6>Commentaires</h6>
-                <ul class="list-group mb-3">
+                <!-- list of comments -->
+                <ul id="items" class="list-group mb-3">
                     <% for(var i = 0; i < course.comments.length; i++) { %>
                         <li class="list-group-item">
                             <p>
@@ -67,6 +69,12 @@
                         </li>
                     <% } %>
                 </ul>
+                <!-- pagination -->
+                <div id="pagination" class="my-3">
+                    <div id="prevButton"></div>
+                    <div id="pageButtons"></div>
+                    <div id="nextButton"></div>
+                </div>
             </div>
         </div>
         <!-- Footer-->

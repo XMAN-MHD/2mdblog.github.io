@@ -25,20 +25,19 @@
             </header>
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
+            <!-- delete and update links -->
+                <% if(deletePost) {%>
+                <p class="container px-4 px-lg-5 text-end">
+                    <a href="/posts/<%= post._id %>/update" class="btn btn-warning text-uppercase text-decoration-none">
+                        Modifier
+                    </a>
+                    <a href="/posts/<%= post._id %>/delete" class="btn btn-danger text-uppercase text-decoration-none">
+                        Supprimer
+                    </a>
+                </p>
+                <% }%>
             <!-- Post Content-->
                <article class="container px-4 px-lg-5 text-break mobile-text">
-                <!-- delete and update links -->
-                    <% if(deletePost) {%>
-                    <p class="text-end">
-                        <a href="/posts/<%= post._id %>/update" class="btn btn-warning text-uppercase text-decoration-none">
-                            Modifier
-                        </a>
-                        <a href="/posts/<%= post._id %>/delete" class="btn btn-danger text-uppercase text-decoration-none">
-                            Supprimer
-                        </a>
-                    </p>
-                    <% }%>
-                <!-- body of the post -->
                     <%- post.message %>
                 </article>
             <!-- Send a new comment -->
@@ -56,8 +55,10 @@
                 </div>
             <!-- Display the Comments -->
                 <div class="container px-4 px-lg-5 my-5">
+                    <!-- title -->
                     <h6>Commentaires</h6>
-                    <ul class="list-group mb-3">
+                    <!-- list of the comments -->
+                    <ul id="items" class="list-group mb-3">
                         <% for(var i = 0; i < post.comments.length; i++) { %>
                             <li class="list-group-item">
                                 <p>
@@ -69,6 +70,12 @@
                             </li>
                         <% } %>
                     </ul>
+                    <!-- pagination -->
+                    <div id="pagination" class="my-3">
+                        <div id="prevButton"></div>
+                        <div id="pageButtons"></div>
+                        <div id="nextButton"></div>
+                    </div>
                 </div>
         </div>
         <!-- Footer-->

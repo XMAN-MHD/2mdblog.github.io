@@ -6,16 +6,16 @@
         <!-- Navigation-->
         <%- include('../layout/navBar.ejs') %>
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('<%= projects.postImage %>')">
+        <header class="masthead" style="background-image: url('<%= project.postImage %>')">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h5><%= projects.title %></h5>
+                            <h5><%= project.title %></h5>
                             <p>
                                 Posté par
-                                <a href="/users/<%= projects.userId._id %>" style="color: white;"><%= projects.userId.username %></a>
-                                <%= projects.postDate.toDateString() %>
+                                <a href="/users/<%= project.userId._id %>" style="color: white;"><%= project.userId.username %></a>
+                                <%= project.postDate.toDateString() %>
                             </p>
                         </div>
                     </div>
@@ -24,9 +24,20 @@
         </header>
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
-             <!-- Post Content-->
+            <!-- delete and update links -->
+                <% if(deletePost) {%>
+                    <p class="container px-4 px-lg-5 text-end">
+                        <a href="/projects/<%= project._id %>/update" class="btn btn-warning text-uppercase text-decoration-none">
+                            Modifier
+                        </a>
+                        <a href="/projects/<%= project._id %>/delete" class="btn btn-danger text-uppercase text-decoration-none">
+                            Supprimer
+                        </a>
+                    </p>
+                <% }%>
+            <!-- Post Content-->
              <article class="container px-4 px-lg-5 mobile-text">
-                <%- projects.message %>
+                <%- project.message %>
             </article>
             <!-- Send a new comment -->
             <div class="container px-4 px-lg-5">
@@ -34,7 +45,7 @@
                     <p class="text-custom-color text-center" style="color: red">Connectez-vous pour laisser un commentaire</p>
                 <% }%>
                 <h6>Laisser un commentaire</h6>
-                <form action="/projects/<%= projects._id %>/comments/new" method="POST">
+                <form action="/projects/<%= project._id %>/comments/new" method="POST">
                     <div class="form-group mb-4">
                         <textarea name="body" class="form-control w-100" rows="5"></textarea>
                     </div>
@@ -43,19 +54,27 @@
             </div>
             <!-- Display the Comments -->
             <div class="container px-4 px-lg-5 my-5">
+                <!-- title -->
                 <h6>Commentaires</h6>
-                <ul class="list-group mb-3">
-                    <% for(var i = 0; i < projects.comments.length; i++) { %>
+                <!-- list of comments -->
+                <ul id="items" class="list-group mb-3">
+                    <% for(var i = 0; i < project.comments.length; i++) { %>
                         <li class="list-group-item">
                             <p>
-                                <a href="/users/<%= projects.comments[i].authorId %>" class="text-decoration-underline"><%= projects.comments[i].author %></a>
+                                <a href="/users/<%= project.comments[i].authorId %>" class="text-decoration-underline"><%= project.comments[i].author %></a>
                                 <br>
-                                <%= projects.comments[i].body %>
+                                <%= project.comments[i].body %>
                             </p>  
-                            <span class="text-muted fs-6"><%= projects.comments[i].dateOfComment.toLocaleDateString() %></span>
+                            <span class="text-muted fs-6"><%= project.comments[i].dateOfComment.toLocaleDateString() %></span>
                         </li>
                     <% } %>
                 </ul>
+                <!-- pagination -->
+                <div id="pagination" class="my-3">
+                    <div id="prevButton"></div>
+                    <div id="pageButtons"></div>
+                    <div id="nextButton"></div>
+                </div>
             </div>
         </div>
         <!-- Footer-->

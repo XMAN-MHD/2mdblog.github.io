@@ -17,7 +17,6 @@ const updatePost = async (req, res) => {
             editor: true, 
             postToUpdate:postToUpdate
         } 
-        
     );
 }
 /*

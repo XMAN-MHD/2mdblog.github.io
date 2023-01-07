@@ -42,11 +42,14 @@ const renderCourseController = require('./controllers/rendering/courses/course')
 const renderProjectController = require('./controllers/rendering/projects/project');
 const renderRequestedUserController = require('./controllers/rendering/users/requestedUser');
 const deleteBlogPostController = require('./controllers/deleting/blog/post');
+const deleteProjectsPostController = require('./controllers/deleting/projects/post');
 const deleteCoursesPostController = require('./controllers/deleting/courses/post');
 const updateBlogPostController = require('./controllers/updating/blog/post');
 const updateCoursesPostController = require('./controllers/updating/courses/post');
+const updateProjectsPostController = require('./controllers/updating/projects/post');
 const saveUpdatedCoursesPostController = require('./controllers/updating/courses/save');
 const saveUpdatedBlogPostController = require('./controllers/updating/blog/save');
+const saveUpdatedProjectsPostController = require('./controllers/updating/projects/save');
     //custom middlewares 
 const checkEmptyRegistrationFieldsMiddleware = require('./middlewares/users/checkEmptyRegistrationFields'); 
 const checkEmptyLoginFieldsMiddleware = require('./middlewares/users/checkEmptyLoginFields'); 
@@ -140,6 +143,8 @@ app.get('/users/:user', renderRequestedUserController);
 app.get('/projets', renderProjectsController);
 app.get('/projets/new', renderNewProjectController);
 app.get('/projets/:id', renderProjectController);
+app.get('/projects/:id/delete', deleteProjectsPostController) 
+app.get('/projects/:id/update', updateProjectsPostController)
 app.get('/posts/new', renderNewPostController);
 app.get('/posts/:id', getPostController);
 app.get('/posts/:id/delete', deleteBlogPostController)  
@@ -162,6 +167,7 @@ app.post('/courses/:id/comments/new', storeCoursesPostCommentController);
 app.post('/courses/:id/save', saveUpdatedCoursesPostController);
 app.post('/projets/store', storeProjectController);
 app.post('/projects/:id/comments/new', storeProjectsPostCommentController);
+app.post('/projects/:id/save', saveUpdatedProjectsPostController);
 /*
     Handle not found request
 */

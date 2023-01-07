@@ -20,18 +20,18 @@
         </header>
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
+            <!-- texte -->
+            <p class="container px-4 px-lg-5 mobile-text">
+                Avez-vous du mal à concrétiser vos idées de projets ? Laissez les projets réussis de 2MD vous inspirer et vous guider ! Avec leur expertise et leur approche innovante, vous pourrez donner vie à vos projets de rêve. N'abandonnez pas votre créativité et votre ambition - utilisez les projets de 2MD comme catalyseur pour réaliser vos objectifs. Faites confiance à 2MD pour vous aider à créer les projets de vos rêves.
+            </p>
+            <!-- post content -->
             <div class="container px-4 px-lg-5">
-                <!-- texte -->
-                <p class="mobile-text">
-                    Avez-vous du mal à concrétiser vos idées de projets ? Laissez les projets réussis de 2MD vous inspirer et vous guider ! Avec leur expertise et leur approche innovante, vous pourrez donner vie à vos projets de rêve. N'abandonnez pas votre créativité et votre ambition - utilisez les projets de 2MD comme catalyseur pour réaliser vos objectifs. Faites confiance à 2MD pour vous aider à créer les projets de vos rêves.
-                </p>
-                <div>
                     <% if( (projectsPosts !== null) && (projectsPosts.length > 0) ) { %>
-                        <ul id="items">
+                        <ul id="items" class="list-group">
                             <% for(var i = projectsPosts.length - 1; i >= 0; i--) { %>
-                                <li>
+                                <li class="list-group-item">
                                     <!--Post preview-->
-                                    <div class="post-preview">
+                                    <div class="post-preview" style="min-height: 150px;">
                                         <a href="projets/<%= projectsPosts[i]._id %>">
                                             <h5><%= projectsPosts[i].title %></h5>
                                         </a>
@@ -41,18 +41,15 @@
                                             <%= projectsPosts[i].postDate.toDateString() %>
                                         </p>
                                     </div>
-                                    <!-- Divider-->
-                                    <hr class="my-4" />
                                 </li>
                             <% } %>
                         </ul>
                     <% } %>
-                </div>
-                <div id="pagination">
-                    <div id="prevButton"></div>
-                    <div id="pageButtons"></div>
-                    <div id="nextButton"></div>
-                </div> 
+            </div>
+            <div id="pagination">
+                <div id="prevButton"></div>
+                <div id="pageButtons"></div>
+                <div id="nextButton"></div>
             </div>
         </div>
         <!-- Footer-->

@@ -19,15 +19,13 @@
             </div>
         </header>
         <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
-            <!-- container -->
-            <div class="container px-4 px-lg-5">
-                <div>
-                    <!-- texte -->
-                    <p class="mobile-text">
-                        Êtes-vous prêt à faire progresser votre carrière avec des compétences en développement web ? 2MD est le choix idéal pour des cours en ligne de qualité enseignés par un enseignant talentueux et un développeur web expérimenté. Avec 2MD, vous aurez le soutien et les conseils nécessaires pour réussir dans le domaine concurrentiel du développement web. N'attendez plus pour investir dans votre avenir - inscrivez-vous aux cours de 2MD dès maintenant !    
-                    </p>
-                    <!-- posts -->
+        <main class="container px-4 px-lg-5">
+            <!-- texte -->
+                <p class="container px-4 px-lg-5 mobile-text">
+                    Êtes-vous prêt à faire progresser votre carrière avec des compétences en développement web ? 2MD est le choix idéal pour des cours en ligne de qualité enseignés par un enseignant talentueux et un développeur web expérimenté. Avec 2MD, vous aurez le soutien et les conseils nécessaires pour réussir dans le domaine concurrentiel du développement web. N'attendez plus pour investir dans votre avenir - inscrivez-vous aux cours de 2MD dès maintenant !    
+                </p>
+            <!-- posts content -->
+                <div class="container px-4 px-lg-5">
                     <% if( (coursesPosts !== null) && (coursesPosts.length > 0) ) { %>
                         <ul id="items" class="list-group">
                             <% for(var i = coursesPosts.length - 1; i >= 0; i--) { %>
@@ -48,14 +46,13 @@
                         </ul>
                     <% } %>
                 </div>
-                <!-- pagination -->
+            <!-- pagination -->
                 <div id="pagination">
                     <div id="prevButton"></div>
                     <div id="pageButtons"></div>
                     <div id="nextButton"></div>
                 </div> 
-            </div>
-        </div>
+        </main>
         <!-- Footer-->
         <%- include('../layout/footer.ejs') %>
         <!-- Bootstrap core JS-->
