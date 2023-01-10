@@ -1,17 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav" style="color: white">
 <div class="container px-4 px-lg-5">
-    <a class="navbar-brand" href="/users/2md">2MD</a>
+    <a class="navbar-brand" href="/users/2md" style="color: white">2MD</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
+       <span style="color: white">Menu</span> 
+        <i class="fas fa-bars" style="color: white"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ms-auto py-4 py-lg-0">
-            <li class="nav-item" ><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Accueil</a></li>
+            <li class="nav-item" ><a style="color: white" class="nav-link px-lg-3 py-3 py-lg-4" href="/">Accueil</a></li>
             <% if(loggedIn) {%>
                 <% if(Username === '2MD') {%>
                 <li id="subnav" class="nav-item dropdown" >
-                    <a id="subnav-button" class="dropdown-toggle nav-link px-lg-3 pt-3 pt-lg-4" data-bs-toggle="dropdown" href="#">Publier</a>
+                    <a id="subnav-button" class="dropdown-toggle nav-link px-lg-3 pt-3 pt-lg-4" style="color: white" data-bs-toggle="dropdown" href="#">Publier</a>
                     <ul id="subnav-content" class="dropdown-menu">
                         <li><a class="dropdown-item" href="/posts/new">Blog</a></li>
                         <li><a class="dropdown-item" href="/courses/new">Cours</a></li>
@@ -20,11 +20,11 @@
                 </li>
                 <% } %>
                 <% if(Username !== '2MD') { %>
-                    <li class="nav-item" ><a class="nav-link px-lg-3 py-3 py-lg-4" href="/posts/new">Publier</a></li>
+                    <li class="nav-item" ><a class="nav-link px-lg-3 py-3 py-lg-4" href="/posts/new"  style="color: white">Publier</a></li>
                 <% } %>
             <% } %>
                 <li id="subnav" class="dropdown nav-item">
-                    <a class="dropdown-toggle nav-link px-lg-3 pt-3 pt-lg-4" data-bs-toggle="dropdown" href="#">À PROPOS</a>
+                    <a class="dropdown-toggle nav-link px-lg-3 pt-3 pt-lg-4" data-bs-toggle="dropdown" style="color: white" href="#">À PROPOS</a>
                     <ul class="dropdown-menu" id="subnav-content">
                         <li><a class="dropdown-item" href="/users/2md">2MD</a></li>
                         <li><a class="dropdown-item" href="/courses">Cours</a></li>
@@ -33,13 +33,13 @@
                     </ul>
                 </li>
                 <% if(loggedIn) { %>
-                <li class="nav-item" ><a class="nav-link px-lg-3 py-3 py-lg-4" href="/users/account">Mon Compte</a></li>
+                <li class="nav-item" ><a class="nav-link px-lg-3 py-3 py-lg-4" href="/users/account" style="color: white">Mon Compte</a></li>
                 <% } %>
                 <% if(!loggedIn) {%>
-                    <li class="nav-item" id="connexion"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/auth/login">Connexion</a></li>
+                    <li class="nav-item" id="connexion"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/auth/login" style="color: white">Connexion</a></li>
                 <% } %>
             <% if(loggedIn) {%>
-                <li class="nav-item" ><a class="nav-link px-lg-3 py-3 py-lg-4" href="/users/logout"><i class="fas fa-sign-out-alt"></i></a></li>
+                <li class="nav-item" ><a class="nav-link px-lg-3 py-3 py-lg-4" href="/users/logout"><i class="fas fa-sign-out-alt" style="color: white"></i></a></li>
             <% } %>
         </ul>
     </div>

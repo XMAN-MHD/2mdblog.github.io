@@ -28,9 +28,7 @@
                 <div>
                     <!-- Prénom et Nom -->
                     <div class="post-preview">
-                        <a href="#">
-                            <h2 class="post-title">Prénom et Nom</h2>
-                        </a>
+                        <h2 class="post-title purple-hover">Prénom et Nom</h2>
                         <p class="post-meta">
                             <% if(user !== null) { %> 
                                 <%= user.name %>
@@ -41,7 +39,7 @@
                     <hr class="my-4" />
                     <!-- Email -->
                     <div class="post-preview">
-                        <a href="#"><h2 class="post-title">Email</h2></a>
+                        <h2 class="post-title">Email</h2>
                         <p class="post-meta">
                             <% if(user !== null) { %> 
                                 <%= user.email %>
@@ -52,9 +50,7 @@
                     <hr class="my-4" />
                     <!-- Téléphone -->
                     <div class="post-preview">
-                        <a href="#">
-                            <h2 class="post-title">Téléphone</h2>
-                        </a>
+                        <h2 class="post-title">Téléphone</h2>
                         <p class="post-meta">
                             <% if(user !== null) { %> 
                                 <%= user.phone %>
@@ -65,9 +61,7 @@
                     <hr class="my-4" />
                     <!-- Description -->
                     <div class="post-preview">
-                        <a href="#">
-                            <h2 class="post-title">Description</h2>
-                        </a>
+                        <h2 class="post-title">Description</h2>
                         <p class="post-meta">
                             <% if(user !== null) { %> 
                                 <%- user.message %>
@@ -79,16 +73,14 @@
                         <hr class="my-4" />
                         <div class="post-preview">
                         <!-- title -->
-                            <a href="#">
-                                <h2 class="post-title">Publications</h2>
-                            </a>
+                        <h2 class="post-title">Publications</h2>
                         <!-- Posts -->
                             <div class="post-meta">
-                                <ul id="items" class="list-group" style="height: 500px; overflow:auto;">
+                                <ul id="items" class="list-group mt-3" style="height: 500px; overflow:auto;">
                                     <% for(var i = posts.length - 1; i >= 0; i--) { %>
-                                        <li class="list-group-item">
+                                        <li class="list-group-item bgPurple">
                                             <div style="height: 80px; overflow-y: auto;">
-                                                <a href="/posts/<%= posts[i]._id %>"><%= posts[i].title %></a>
+                                                <a href="/posts/<%= posts[i]._id %>" class="texte-white white-hover"><%= posts[i].title %></a>
                                             </div>
                                         </li>
                                     <% } %>

@@ -11041,8 +11041,9 @@ blockquote {
   left: 0;
   right: 0;
   z-index: 1030;
+  color: white;
   border-bottom: 1px solid #dee2e6;
-  background-color: #fff;
+  background-color:#9c27b0;
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 #mainNav .navbar-brand {
@@ -11063,7 +11064,7 @@ blockquote {
 @media (min-width: 992px) {
   #mainNav {
     border-bottom: 1px solid transparent;
-    background: transparent;
+    background: #9c27b0;
   }
   #mainNav .navbar-brand {
     color: #fff;
@@ -11072,10 +11073,10 @@ blockquote {
     color: rgba(255, 255, 255, 0.8);
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link {
-    color: #fff;
+    color: white;
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: black;
   }
 }
 @media (min-width: 992px) {
@@ -11098,7 +11099,7 @@ blockquote {
     color: #212529;
   }
   #mainNav.is-fixed .navbar-brand:focus, #mainNav.is-fixed .navbar-brand:hover {
-    color: #0085A1;
+    color: #0085A1; 
   }
   #mainNav.is-fixed .navbar-nav > li.nav-item > a {
     color: #212529;
@@ -11236,7 +11237,7 @@ header.masthead .site-heading .h1 {
   font-size: 1.125rem;
   font-style: italic;
   margin-top: 0;
-  color: #6c757d;
+  color: black;
 }
 .post-preview > .post-meta > a {
   text-decoration: none;
@@ -11255,4 +11256,48 @@ header.masthead .site-heading .h1 {
   font-size: 0.8em;
   color: white;
   background-color: #0c4128;
+}
+.comments-bg 
+{
+  background-color: #9c27b0;
+}
+.texte-white 
+{
+  color: white;
+}
+.post-meta-texte-size 
+{
+  font-size: 0.8em;
+}
+.black-hover:hover 
+{
+  color: black;
+}
+.purple-hover:hover 
+{
+  color: #9c27b0;
+}
+.white-hover:hover 
+{
+  color: white;
+}
+.bgBlack-hover:hover 
+{
+  background-color: black;
+}
+.bgPurple-hover:hover 
+{
+  background-color:#9c27b0;
+}
+.bgWhite-hover:hover 
+{
+  background-color:white;
+}
+.bgPurple 
+{
+  background-color:#9c27b0; 
+}
+.bgWhite 
+{
+  background-color: white;
 }

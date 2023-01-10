@@ -1,10 +1,10 @@
-<footer class="border-top mt-5">
+<footer class="border-top mt-5 bgPurple">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <ul class="list-inline text-center">
                     <li class="list-inline-item">
-                        <a href="https://www.linkedin.com/in/mouhamed-moustapha-diouf/" target="_blank">
+                        <a href="https://www.linkedin.com/in/mouhamed-moustapha-diouf/" class="purple-hover" target="_blank">
                             <span class="fa-stack fa-lg">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
@@ -12,7 +12,7 @@
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="https://web.facebook.com/coderavec2md" target="_blank">
+                        <a href="https://web.facebook.com/coderavec2md" class="purple-hover" target="_blank">
                             <span class="fa-stack fa-lg">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
@@ -20,7 +20,7 @@
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="https://github.com/XMAN-MHD?tab=repositories" target="_blank">
+                        <a href="https://github.com/XMAN-MHD?tab=repositories" class="purple-hover" target="_blank">
                             <span class="fa-stack fa-lg">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-github fa-stack-1x fa-inverse"></i>
@@ -28,12 +28,12 @@
                         </a>
                     </li>
                 </ul>
-                <div class="small text-center text-muted fst-italic">
+                <div class="small text-center fst-italic">
                     <% 
                         let today = new Date();
                         let currentYear = today.getFullYear().toString();
                     %>
-                    Copyright &copy; 2MD <%= currentYear; %>
+                    <span class="text-white">Copyright &copy; 2MD <%= currentYear; %></span> 
                 </div>
             </div>
         </div>

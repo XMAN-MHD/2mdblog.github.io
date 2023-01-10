@@ -44,16 +44,18 @@
                     <% if( (posts !== null) && (posts.length > 0) ) { %>
                         <ul id="items" class="list-group" >
                             <% for(var i = posts.length - 1; i >= 0; i--) { %>
-                                <li class="list-group-item">
+                                <li class="list-group-item comments-bg">
                                     <!-- Post preview-->
                                     <div class="post-preview" style="height: 100px; overflow-y: auto;">
                                         <a href="posts/<%= posts[i]._id %>">
-                                            <h6><%= posts[i].title %></h6>
+                                            <h6 class="texte-white black-hover"><%= posts[i].title %></h6>
                                         </a>
                                         <p class="post-meta">
+                                           <span  class="post-meta-texte-size text-white">
                                             Posté par
-                                            <a href="/users/<%= posts[i].userId._id %>"><%= posts[i].userId.username %></a>
+                                            <a href="/users/<%= posts[i].userId._id %>" class="texte-white black-hover"><%= posts[i].userId.username %></a>
                                             <%= posts[i].postDate.toDateString() %>
+                                            </span>
                                         </p>
                                     </div>
                                 </li>
@@ -79,14 +81,16 @@
                             <% for(var j = posts.length - 1; j > posts.length - 6; j--) { %>
                                 <!-- comments-->
                                 <% if( (posts[j].comments !== null) && (posts[j].comments.length > 0) ) { %>
-                                <li class="list-group-item">
-                                        <h5><%= posts[j].title %></h5>
+                                <li class="list-group-item comments-bg">
+                                    <a href="posts/<%= posts[j]._id %>">
+                                        <h5 class="texte-white black-hover"><%= posts[j].title %></h5>
+                                    </a>
                                         <p>
-                                            <a href="/users/<%= posts[j].comments[0].authorId %>" class="text-decoration-none"><%= posts[j].comments[0].author %></a>
+                                            <a href="/users/<%= posts[j].comments[0].authorId %>" class="text-decoration-none texte-white black-hover "><%= posts[j].comments[0].author %></a>
                                             <br>
                                             <textarea class="form-control w-100 bg-white" disabled rows="5"><%= posts[j].comments[0].body %></textarea>
                                         </p>  
-                                        <span class="text-muted fs-6"><%= posts[j].comments[0].dateOfComment.toLocaleDateString() %></span>
+                                        <span class="fs-6 text-white black-hover"><%= posts[j].comments[0].dateOfComment.toLocaleDateString() %></span>
                                 </li>
                                 <% } %>
                             <% } %>

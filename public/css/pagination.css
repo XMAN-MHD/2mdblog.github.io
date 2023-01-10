@@ -21,7 +21,7 @@
 }
 #pageButtons button:hover
 {
-    background-color: #0085A1;
+    background-color: #9c27b0;
 
 }
 #prevButton button
@@ -42,6 +42,6 @@
 }
 #nextButton button:hover, #prevButton button:hover
 {
-    background-color: #0085A1;
+    background-color: #9c27b0;
 }
 

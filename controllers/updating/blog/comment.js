@@ -20,7 +20,7 @@ const updateComment = async (req, res) => {
         // get the comment 
         const comment = comments[commentId];
         // update the the message of the comment
-        comment.body = req.body.message;
+        comment.body = req.body.body;
         // save the changes
         post.save();
         // return to the post view

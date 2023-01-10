@@ -44,18 +44,21 @@
                     <%- post.message %>
                 </article>
             <% }%>
+            <% if(!loggedIn) {%>
+                <p class="text-custom-color text-center" style="color: red">Connectez-vous pour laisser un commentaire</p>
+            <% }%>
             <!-- Send a new comment -->
-                <div class="container px-4 px-lg-5">
-                    <% if(!loggedIn) {%>
-                        <p class="text-custom-color text-center" style="color: red">Connectez-vous pour laisser un commentaire</p>
-                    <% }%>
-                    <h6>Laisser un commentaire</h6>
-                    <form action="/posts/<%= post._id %>/comments/new" method="POST">
-                        <div class="form-group mb-4">
-                            <textarea name="body" class="form-control w-100" rows="5"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Envoyer</button>
-                    </form>
+                <ul id="items" class="list-group mb-3">
+                    <li class="list-group-item bgPurple">                                      
+                        <h6 class="texte-white black-hover">Laisser un commentaire</h6>
+                        <form action="/posts/<%= post._id %>/comments/new" method="POST">
+                            <div class="form-group mb-4">
+                                <textarea name="body" class="form-control w-100" rows="5"></textarea>
+                            </div>
+                            <button type="submit" class="btn bg-white">Envoyer</button>
+                        </form>
+                    </li>
+                </ul>
                 </div>
             <!-- Display the Comments -->
                 <div class="container px-4 px-lg-5 my-5">
@@ -65,13 +68,13 @@
                     <!-- list of the comments -->
                     <ul id="items" class="list-group mb-3">
                         <% for(var i = 0; i < post.comments.length; i++) { %>
-                            <li class="list-group-item">
+                            <li class="list-group-item bgPurple">
                                 <div>
-                                    <a href="/users/<%= post.comments[i].authorId %>"><%= post.comments[i].author %></a>
+                                    <a href="/users/<%= post.comments[i].authorI %>" class="texte-white black-hover"><%= post.comments[i].author %></a>
                                     <div id="comments">
                                         <form id="update-comment-form" action="/posts/<%= post._id %>/<%= i %>/save" method="post">
-                                            <textarea id="commentField<%= i %>" name="message" rows="5" class="w-100 form-control bg-white" disabled><%= post.comments[i].body %></textarea>
-                                            <span class="text-muted fs-6 d-block"><%= post.comments[i].dateOfComment.toLocaleDateString() %></span>
+                                            <textarea id="commentField<%= i %>" name="body" rows="5" class="w-100 form-control bg-white" disabled><%= post.comments[i].body %></textarea>
+                                            <span class="texte-white fs-6 d-block"><%= post.comments[i].dateOfComment.toLocaleDateString() %></span>
                                             <% if(post.comments[i].authorId.equals(userId)) {%>
                                                 <a id="update-btn" href="#commentField<%= i %>" class="d-inline fs-6 text-warning">Modifier</a>
                                                 <a href="/posts/<%= post._id %>/<%= i %>" id="delete-btn" class="d-inline fs-6 text-danger">Supprimer</a>    
