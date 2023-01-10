@@ -1,0 +1,21 @@
+<script>
+    const comments = document.querySelectorAll('#comments form');
+    for (let form of comments) 
+    {
+
+        const formElements = form.children;
+        let textArea = formElements[0];
+        let btnUpdate = formElements[2];
+        let btnDelete = formElements[3];
+        let btnEnregistrer = formElements[4];
+        function updateComment(e) 
+        {
+            btnEnregistrer.classList.toggle('d-none');
+            textArea.removeAttribute('disabled')
+            btnDelete.classList.toggle('d-none');
+            btnUpdate.classList.toggle('d-none');
+            
+        }
+        btnUpdate.addEventListener('click', updateComment);
+    }
+</script>

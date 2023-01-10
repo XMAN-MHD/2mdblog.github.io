@@ -77,25 +77,29 @@
                     <% if( (posts !== null) && (posts.length > 0) ) { %> 
                         <!-- Divider-->
                         <hr class="my-4" />
-                        <!-- Posts -->
                         <div class="post-preview">
+                        <!-- title -->
                             <a href="#">
                                 <h2 class="post-title">Publications</h2>
                             </a>
+                        <!-- Posts -->
                             <div class="post-meta">
-                                <ul id="items" class="list-group">
+                                <ul id="items" class="list-group" style="height: 500px; overflow:auto;">
                                     <% for(var i = posts.length - 1; i >= 0; i--) { %>
-                                        <li class="list-group-item" style="min-height: 80px;">
-                                            <a href="/posts/<%= posts[i]._id %>"><%= posts[i].title %></a>
+                                        <li class="list-group-item">
+                                            <div style="height: 80px; overflow-y: auto;">
+                                                <a href="/posts/<%= posts[i]._id %>"><%= posts[i].title %></a>
+                                            </div>
                                         </li>
                                     <% } %>
                                 </ul>
-                                <div id="pagination">
-                                    <div id="prevButton"></div>
-                                    <div id="pageButtons"></div>
-                                    <div id="nextButton"></div>
-                                </div> 
                             </div>
+                        <!-- pagination -->
+                            <div id="pagination">
+                                <div id="prevButton"></div>
+                                <div id="pageButtons"></div>
+                                <div id="nextButton"></div>
+                            </div> 
                         </div>
                     <% } %>
                 </div>

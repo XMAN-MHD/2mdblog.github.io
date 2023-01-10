@@ -44,9 +44,11 @@ const renderRequestedUserController = require('./controllers/rendering/users/req
 const deleteBlogPostController = require('./controllers/deleting/blog/post');
 const deleteProjectsPostController = require('./controllers/deleting/projects/post');
 const deleteCoursesPostController = require('./controllers/deleting/courses/post');
+const deleteBlogPostCommentController = require('./controllers/deleting/blog/comment');
 const updateBlogPostController = require('./controllers/updating/blog/post');
 const updateCoursesPostController = require('./controllers/updating/courses/post');
 const updateProjectsPostController = require('./controllers/updating/projects/post');
+const updateBlogPostCommentController = require('./controllers/updating/blog/comment');
 const saveUpdatedCoursesPostController = require('./controllers/updating/courses/save');
 const saveUpdatedBlogPostController = require('./controllers/updating/blog/save');
 const saveUpdatedProjectsPostController = require('./controllers/updating/projects/save');
@@ -102,13 +104,8 @@ app.use("/users/login", checkEmptyLoginFieldsMiddleware);
     // middleware express-session use the req.session object to save the session ID into browser's cookies then sign the user and encrypt its sessionID to keep the user log in
 app.use(expressSession({secret: 'keyboard cat'}));  
     // custum middleware to prevent an authentificated use to log in or to register 
-app.use('/auth/register', keepUsersOutMiddleware);    
-    // custum middleware to prevent visitors to connect, to publish, to comment and to log out 
-app.use('/posts/new', keepVisitorsOutMiddleware);
-app.use('/users/logout', keepVisitorsOutMiddleware);
-app.use('/users/account', keepVisitorsOutMiddleware);
-app.use('/posts/:id/comments/new', keepVisitorsOutMiddleware);
-    // custom middleware allow the front-end to know whether the user has a session or not 
+app.use('/auth/register', keepUsersOutMiddleware);   
+// custom middleware allow the front-end to know whether the user has a session or not 
 app.use(
     '*',
     (req, res, next) => {
@@ -127,7 +124,13 @@ app.use(
         }
         next();
     }
-) 
+)  
+    // custum middleware to prevent visitors to connect, to publish, to comment and to log out 
+app.use('/posts/new', keepVisitorsOutMiddleware);
+app.use('/users/logout', keepVisitorsOutMiddleware);
+app.use('/users/account', keepVisitorsOutMiddleware);
+app.use('/posts/:id/comments/new', keepVisitorsOutMiddleware);
+
 /*
     handle get request
 */ 
@@ -149,6 +152,7 @@ app.get('/posts/new', renderNewPostController);
 app.get('/posts/:id', getPostController);
 app.get('/posts/:id/delete', deleteBlogPostController)  
 app.get('/posts/:id/update', updateBlogPostController)
+app.get('/posts/:postId/:commentId', deleteBlogPostCommentController)
 app.get('/courses', renderCoursesController);
 app.get('/courses/new', renderNewCourseController);
 app.get('/courses/:id', renderCourseController);
@@ -160,8 +164,9 @@ app.get('/courses/:id/update', updateCoursesPostController)
 app.post('/users/new', storeUserController); 
 app.post('/users/login', getUserLoginController); 
 app.post('/posts/store', storePostController);
-app.post('/posts/:id/comments/new', storeBlogPostCommentController);
 app.post('/posts/:id/save', saveUpdatedBlogPostController);
+app.post('/posts/:id/comments/new', storeBlogPostCommentController);
+app.post('/posts/:postId/:commentId/save', updateBlogPostCommentController);
 app.post('/courses/store', storeCourseController);
 app.post('/courses/:id/comments/new', storeCoursesPostCommentController);
 app.post('/courses/:id/save', saveUpdatedCoursesPostController);

@@ -46,7 +46,7 @@
                             <% for(var i = posts.length - 1; i >= 0; i--) { %>
                                 <li class="list-group-item">
                                     <!-- Post preview-->
-                                    <div class="post-preview" style="min-height: 150px;">
+                                    <div class="post-preview" style="height: 100px; overflow-y: auto;">
                                         <a href="posts/<%= posts[i]._id %>">
                                             <h6><%= posts[i].title %></h6>
                                         </a>
@@ -82,9 +82,9 @@
                                 <li class="list-group-item">
                                         <h5><%= posts[j].title %></h5>
                                         <p>
-                                            <a href="/users/<%= posts[j].comments[0].authorId %>" class="text-decoration-underline"><%= posts[j].comments[0].author %></a>
+                                            <a href="/users/<%= posts[j].comments[0].authorId %>" class="text-decoration-none"><%= posts[j].comments[0].author %></a>
                                             <br>
-                                            <%= posts[j].comments[0].body %>
+                                            <textarea class="form-control w-100 bg-white" disabled rows="5"><%= posts[j].comments[0].body %></textarea>
                                         </p>  
                                         <span class="text-muted fs-6"><%= posts[j].comments[0].dateOfComment.toLocaleDateString() %></span>
                                 </li>
