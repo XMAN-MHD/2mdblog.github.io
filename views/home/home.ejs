@@ -38,14 +38,20 @@
                 </div>
                 <h1 class="mt-3 mb-5">Les Articles  du Blog</h1>
                 <!-- Search Bar -->
-                <%- include('../layout/searchBar.ejs') %>
+                <div class="search-container">
+                    <form action="/search/blog">
+                        <input type="text" name="q" placeholder="Titre article..." required>
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
                 <!-- Blog posts -->
                 <div class="my-5">
-                    <% if( (posts !== null) && (posts.length > 0) ) { %>
+                    <!-- list of posts -->
+                    <% if( (posts !== null) && (posts.length > 0) && (typeof posts !== undefined)) { %>
                         <ul id="items" class="list-group" >
+                            <!-- post preview-->
                             <% for(var i = posts.length - 1; i >= 0; i--) { %>
-                                <li class="list-group-item comments-bg">
-                                    <!-- Post preview-->
+                                <li class="list-group-item post-bg bgPurple-hover border-white">
                                     <div class="post-preview" style="height: 100px; overflow-y: auto;">
                                         <a href="posts/<%= posts[i]._id %>">
                                             <h6 class="texte-white black-hover"><%= posts[i].title %></h6>
@@ -69,33 +75,41 @@
                     <div id="pageButtons"></div>
                     <div id="nextButton"></div>
                 </div> 
+                <!-- see all the posts -->
                 <% if(searching) { %>
                     <!-- Click the button show all the blog posts-->
-                    <div class="d-flex justify-content-end y-4 mb-3"><a class="btn btn-primary text-uppercase" href="/">Voir tous</a></div>
+                    <div class="d-flex justify-content-end y-4 mb-3">
+                        <a href="/" class="btn btn-dark text-uppercase bgPurple-hover">
+                            Voir tous
+                        </a>
+                    </div>
                 <% } %>
-                <!-- the comments on the recent posts -->
-                <% if( (posts !== null) && (posts.length > 0) ) { %>
+                <!-- the comments on the recent posts if we have at least 5 items-->
+                <% if(!searching) { %>
+                <% if( (posts !== null) && (posts.length > 3) && (typeof posts !== undefined)) { %>
                 <div>
                     <h6 style="margin: 20px 0;">Les commentaires sur les articles récents</h6>
+                        <!-- list of comments -->
                         <ul class="list-group">
-                            <% for(var j = posts.length - 1; j > posts.length - 6; j--) { %>
-                                <!-- comments-->
-                                <% if( (posts[j].comments !== null) && (posts[j].comments.length > 0) ) { %>
-                                <li class="list-group-item comments-bg">
+                            <% for(var j = posts.length - 1; j > posts.length - 4; j--) { %>
+                                <!-- comment-->
+                                <% if( (posts[j].comments !== null) && (posts[j].comments.length > 0) && (typeof posts[j].comments !== undefined) ) { %>
+                                <li class="list-group-item comment-bg bgPurple-hover border-white">
                                     <a href="posts/<%= posts[j]._id %>">
-                                        <h5 class="texte-white black-hover"><%= posts[j].title %></h5>
+                                        <h5 class="texte-white black-hover text-center"><%= posts[j].title %></h5>
                                     </a>
-                                        <p>
-                                            <a href="/users/<%= posts[j].comments[0].authorId %>" class="text-decoration-none texte-white black-hover "><%= posts[j].comments[0].author %></a>
-                                            <br>
-                                            <textarea class="form-control w-100 bg-white" disabled rows="5"><%= posts[j].comments[0].body %></textarea>
-                                        </p>  
-                                        <span class="fs-6 text-white black-hover"><%= posts[j].comments[0].dateOfComment.toLocaleDateString() %></span>
+                                    <p>
+                                        <a href="/users/<%= posts[j].comments[0].authorId %>" class="text-decoration-none texte-white black-hover "><%= posts[j].comments[0].author %></a>
+                                        <br>
+                                        <textarea class="form-control w-100 bg-white" disabled rows="5"><%= posts[j].comments[0].body %></textarea>
+                                    </p>  
+                                    <span class="fs-6 text-white black-hover"><%= posts[j].comments[0].dateOfComment.toLocaleDateString() %></span>
                                 </li>
                                 <% } %>
                             <% } %>
                         </ul>
                 </div>
+                <% } %>
                 <% } %>
             </div>
         </div>

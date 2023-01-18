@@ -78,9 +78,9 @@
                             <div class="post-meta">
                                 <ul id="items" class="list-group mt-3" style="height: 500px; overflow:auto;">
                                     <% for(var i = posts.length - 1; i >= 0; i--) { %>
-                                        <li class="list-group-item bgPurple">
+                                        <li class="list-group-item post-bg bgPurple-hover border-white">
                                             <div style="height: 80px; overflow-y: auto;">
-                                                <a href="/posts/<%= posts[i]._id %>" class="texte-white white-hover"><%= posts[i].title %></a>
+                                                <a href="/posts/<%= posts[i]._id %>" class="texte-white black-hover"><%= posts[i].title %></a>
                                             </div>
                                         </li>
                                     <% } %>

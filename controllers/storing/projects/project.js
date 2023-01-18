@@ -28,7 +28,7 @@ const storeProject = (req, res) => {
                      }
                      else
                      {
-                        return res.redirect('/')
+                        return res.redirect('/projets')
                      } 
                  } 
              )

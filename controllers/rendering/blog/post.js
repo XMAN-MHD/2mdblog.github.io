@@ -11,10 +11,9 @@
     const post = async (req, res) => {
         let deletePost = false;
         let userId = null;
-        let post = null;
         try{
             // get the post to render
-            post = await PostModel.findById(req.params.id).populate({path:'userId', select:['_id', 'username', 'email']});
+            const post = await PostModel.findById(req.params.id).populate({path:'userId', select:['_id', 'username', 'email']});
             // get the logged in user
             const user = await UserModel.findById(req.session.userId);
             // if the user created  the post can delete it

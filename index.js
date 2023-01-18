@@ -17,15 +17,15 @@ const expressSession = require('express-session');
 const UserModel = require('./models/users/User');
     //controllers 
 const logoutUserController = require('./controllers/getting/users/logoutUser');
-const getPostController = require('./controllers/rendering/blog/post');
+const renderBlogPostController = require('./controllers/rendering/blog/post');
 const getUserLoginController = require('./controllers/getting/users/userLogin');
 const storeUserController = require('./controllers/storing/users/user');
 const storePostController = require('./controllers/storing/blog/post');
 const storeCourseController = require('./controllers/storing/courses/course');
 const storeProjectController = require('./controllers/storing/projects/project');
 const storeBlogPostCommentController = require('./controllers/storing/blog/comment');
-const storeCoursesPostCommentController = require('./controllers/storing/courses/coursesPostComment');
-const storeProjectsPostCommentController = require('./controllers/storing/projects/projectsPostComment');
+const storeCoursesPostCommentController = require('./controllers/storing/courses/comment');
+const storeProjectsPostCommentController = require('./controllers/storing/projects/comment');
 const renderHomeController = require('./controllers/rendering/home/home');
 const renderContactController = require('./controllers/rendering/users/contactezMoi');
 const renderAuthLoginController = require('./controllers/rendering/users/authLogin');
@@ -34,7 +34,9 @@ const renderNewPostController = require('./controllers/rendering/blog/newPost');
 const renderNewCourseController = require('./controllers/rendering/courses/newCourse');
 const renderCoursesController = require('./controllers/rendering/courses/courses');
 const renderUserAccountController = require('./controllers/rendering/users/user');
-const renderSearchedBlogPostController = require('./controllers/rendering/home/searchBlogPost');
+const renderSearchedCoursesPostController = require('./controllers/rendering/courses/search');
+const renderSearchedBlogPostController = require('./controllers/rendering/home/search');
+const renderSearchedProjectsPostController = require('./controllers/rendering/projects/search');
 const renderProjectsController = require('./controllers/rendering/projects/projects');
 const renderUser2mdController = require('./controllers/rendering/users/user2md');
 const renderNewProjectController = require('./controllers/rendering/projects/newProject');
@@ -45,10 +47,14 @@ const deleteBlogPostController = require('./controllers/deleting/blog/post');
 const deleteProjectsPostController = require('./controllers/deleting/projects/post');
 const deleteCoursesPostController = require('./controllers/deleting/courses/post');
 const deleteBlogPostCommentController = require('./controllers/deleting/blog/comment');
+const deleteCoursePostCommentController = require('./controllers/deleting/courses/comment');
+const deleteProjectPostCommentController = require('./controllers/deleting/projects/comment');
 const updateBlogPostController = require('./controllers/updating/blog/post');
 const updateCoursesPostController = require('./controllers/updating/courses/post');
 const updateProjectsPostController = require('./controllers/updating/projects/post');
 const updateBlogPostCommentController = require('./controllers/updating/blog/comment');
+const updateCoursesPostCommentController = require('./controllers/updating/courses/comment');
+const updateProjectsPostCommentController = require('./controllers/updating/projects/comment');
 const saveUpdatedCoursesPostController = require('./controllers/updating/courses/save');
 const saveUpdatedBlogPostController = require('./controllers/updating/blog/save');
 const saveUpdatedProjectsPostController = require('./controllers/updating/projects/save');
@@ -125,39 +131,40 @@ app.use(
         next();
     }
 )  
-    // custum middleware to prevent visitors to connect, to publish, to comment and to log out 
-app.use('/posts/new', keepVisitorsOutMiddleware);
-app.use('/users/logout', keepVisitorsOutMiddleware);
-app.use('/users/account', keepVisitorsOutMiddleware);
-app.use('/posts/:id/comments/new', keepVisitorsOutMiddleware);
-
 /*
     handle get request
 */ 
 app.get('/', renderHomeController);
-app.get('/search', renderSearchedBlogPostController);
+app.get('/search/blog', renderSearchedBlogPostController);
 app.get('/contacte', renderContactController);
 app.get('/auth/login', renderAuthLoginController);
 app.get('/auth/register', renderAuthRegisterController);
-app.get('/users/account', renderUserAccountController);
-app.get('/users/logout', logoutUserController);
+app.get('/users/account',keepVisitorsOutMiddleware, renderUserAccountController);
+app.get('/users/logout',keepVisitorsOutMiddleware, logoutUserController);
 app.get('/users/2md', renderUser2mdController);
 app.get('/users/:user', renderRequestedUserController);
 app.get('/projets', renderProjectsController);
 app.get('/projets/new', renderNewProjectController);
 app.get('/projets/:id', renderProjectController);
+app.get('/search/projets/:id', renderProjectController);
 app.get('/projects/:id/delete', deleteProjectsPostController) 
 app.get('/projects/:id/update', updateProjectsPostController)
-app.get('/posts/new', renderNewPostController);
-app.get('/posts/:id', getPostController);
+app.get('/projects/:projectId/:commentId', deleteProjectPostCommentController)
+app.get('/search/projects', renderSearchedProjectsPostController);
+app.get('/posts/new',keepVisitorsOutMiddleware, renderNewPostController);
+app.get('/posts/:id', renderBlogPostController);
+app.get('/search/posts/:id', renderBlogPostController);
 app.get('/posts/:id/delete', deleteBlogPostController)  
 app.get('/posts/:id/update', updateBlogPostController)
 app.get('/posts/:postId/:commentId', deleteBlogPostCommentController)
 app.get('/courses', renderCoursesController);
 app.get('/courses/new', renderNewCourseController);
 app.get('/courses/:id', renderCourseController);
+app.get('/search/courses/:id', renderCourseController);
 app.get('/courses/:id/delete', deleteCoursesPostController) 
 app.get('/courses/:id/update', updateCoursesPostController)
+app.get('/courses/:courseId/:commentId', deleteCoursePostCommentController)
+app.get('/search/courses', renderSearchedCoursesPostController);
 /*
     handle post request
 */
@@ -165,14 +172,16 @@ app.post('/users/new', storeUserController);
 app.post('/users/login', getUserLoginController); 
 app.post('/posts/store', storePostController);
 app.post('/posts/:id/save', saveUpdatedBlogPostController);
-app.post('/posts/:id/comments/new', storeBlogPostCommentController);
+app.post('/posts/:id/comments/new',keepVisitorsOutMiddleware, storeBlogPostCommentController);
 app.post('/posts/:postId/:commentId/save', updateBlogPostCommentController);
 app.post('/courses/store', storeCourseController);
-app.post('/courses/:id/comments/new', storeCoursesPostCommentController);
+app.post('/courses/:id/comments/new',keepVisitorsOutMiddleware, storeCoursesPostCommentController);
 app.post('/courses/:id/save', saveUpdatedCoursesPostController);
+app.post('/courses/:courseId/:commentId/save', updateCoursesPostCommentController);
 app.post('/projets/store', storeProjectController);
-app.post('/projects/:id/comments/new', storeProjectsPostCommentController);
+app.post('/projects/:id/comments/new', keepVisitorsOutMiddleware, storeProjectsPostCommentController);
 app.post('/projects/:id/save', saveUpdatedProjectsPostController);
+app.post('/projects/:projectId/:commentId/save', updateProjectsPostCommentController);
 /*
     Handle not found request
 */

@@ -9,29 +9,34 @@ const UserModel = require('../../../models/users/User');
     */ 
     const renderProject = async (req, res) => {
         let deletePost = false;
-        let userEmail = true;
-        let postAuthorEmail = false;
-        const post = await ProjectsPostModel.findById(req.params.id).populate({path:'userId', select:['_id', 'username', 'email']});
-        if(post)
-        {
-            postAuthorEmail = post.userId.email;
-        }
-        const user = await UserModel.findById(req.session.userId);
-        if (user) 
-        {
-            userEmail = user.email;
-        }
-        if (userEmail  === postAuthorEmail) 
-        {
-            deletePost = true;
-        }
-        res.render(
-            'projects/project', 
+        let userId = null;
+        try{
+            // get the post to render
+            const post = await ProjectsPostModel.findById(req.params.id).populate({path:'userId', select:['_id', 'username', 'email']});
+            // get the logged in user
+            const user = await UserModel.findById(req.session.userId);
+            // if the user created  the post thus the user can delete it
+            if(user && post)
             {
-                project: post, 
-                deletePost: deletePost
-            }
-        );
+                if (user._id.equals(post.userId._id)) 
+                {
+                    deletePost = true;
+                }
+                userId = user._id;
+               }
+            res.render(
+                'projects/project', 
+                {
+                    project: post, 
+                    deletePost,
+                    userId
+                }
+            );
+        }
+        catch(e)
+        {
+            res.render('404/notFound')
+        }
     }
     /*
         give access to renderCourse controller

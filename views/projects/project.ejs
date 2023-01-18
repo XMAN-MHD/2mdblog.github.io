@@ -10,73 +10,103 @@
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h5><%= project.title %></h5>
-                            <p>
-                                Posté par
-                                <a href="/users/<%= project.userId._id %>" style="color: white;"><%= project.userId.username %></a>
-                                <%= project.postDate.toDateString() %>
-                            </p>
-                        </div>
+                        <% if(project !== null && typeof project !== undefined) {%>
+                            <div class="site-heading">
+                                <h5><%= project.title %></h5>
+                                <p>
+                                    Posté par
+                                    <a href="/users/<%= project.userId._id %>" style="color: white;"><%= project.userId.username %></a>
+                                    <%= project.postDate.toDateString() %>
+                                </p>
+                            </div>
+                        <% }%>
                     </div>
                 </div>
             </div>
         </header>
         <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
+        <main class="container px-4 px-lg-5">
             <!-- delete and update links -->
-                <% if(deletePost) {%>
-                    <p class="container px-4 px-lg-5 text-end">
-                        <a href="/projects/<%= project._id %>/update" class="btn btn-warning text-uppercase text-decoration-none">
+            <% if(deletePost) {%>
+                <div class="container px-4 px-lg-5 mobile-text">
+                    <p class="mobile-text text-end">
+                        <a href="/projects/<%= project._id %>/update" class="text-warning mx-2 text-uppercase text-decoration-none">
                             Modifier
                         </a>
-                        <a href="/projects/<%= project._id %>/delete" class="btn btn-danger text-uppercase text-decoration-none">
+                        <a href="/projects/<%= project._id %>/delete" class="text-danger mx-2 text-uppercase text-decoration-none">
                             Supprimer
                         </a>
                     </p>
+                </div>
+            <% }%>
+            <!-- project's post Content-->
+            <div class="container px-4 px-lg-5">
+                <% if(project !== null && typeof project !== undefined) {%>
+                    <article class="mobile-text">
+                    <%- project.message %>
+                    </article>
                 <% }%>
-            <!-- Post Content-->
-             <article class="container px-4 px-lg-5 mobile-text">
-                <%- project.message %>
-            </article>
+            </div>
+            <!-- Text warning user to log in before sending new comment -->
+            <% if(!loggedIn) {%>
+                <div class="container px-4 px-lg-5">
+                    <p class="text-custom-color mobile-text text-center" style="color: red">Connectez-vous pour laisser un commentaire</p>
+                </div>
+            <% }%>
             <!-- Send a new comment -->
             <div class="container px-4 px-lg-5">
-                <% if(!loggedIn) {%>
-                    <p class="text-custom-color text-center" style="color: red">Connectez-vous pour laisser un commentaire</p>
-                <% }%>
-                <h6>Laisser un commentaire</h6>
-                <form action="/projects/<%= project._id %>/comments/new" method="POST">
-                    <div class="form-group mb-4">
-                        <textarea name="body" class="form-control w-100" rows="5"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
-                </form>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item post-bg texte-white">
+                        <h6>Laisser un commentaire</h6>
+                        <form action="/projects/<%= project._id %>/comments/new" method="POST">
+                            <div class="form-group mb-4">
+                                <textarea name="body" class="form-control w-100" rows="5"></textarea>
+                            </div>
+                            <button type="submit" class="btn bgWhite bgPurple-hover white-hover">Envoyer</button>
+                        </form>
+                    </li>
+                </ul>
             </div>
             <!-- Display the Comments -->
-            <div class="container px-4 px-lg-5 my-5">
-                <!-- title -->
-                <h6>Commentaires</h6>
-                <!-- list of comments -->
-                <ul id="items" class="list-group mb-3">
-                    <% for(var i = 0; i < project.comments.length; i++) { %>
-                        <li class="list-group-item">
-                            <p>
-                                <a href="/users/<%= project.comments[i].authorId %>" class="text-decoration-underline"><%= project.comments[i].author %></a>
-                                <br>
-                                <%= project.comments[i].body %>
-                            </p>  
-                            <span class="text-muted fs-6"><%= project.comments[i].dateOfComment.toLocaleDateString() %></span>
-                        </li>
+            <% if(project !== null && typeof project !== undefined) {%>
+                <div class="container px-4 px-lg-5 my-5">
+                    <!-- title -->
+                    <h6>Commentaires</h6>
+                    <!-- list of comments -->
+                    <% if(project.comments !== null && typeof project.comments !== undefined && project.comments.length > 0) {%>
+                        <ul id="items" class="list-group mb-3">
+                            <!-- comment -->
+                            <% for(var i = 0; i < project.comments.length; i++) { %>
+                                <li class="list-group-item bgPurple-hover comment-bg">
+                                    <a href="/users/<%= project.comments[i].authorId %>" class="texte-white black-hover"><%= project.comments[i].author %></a>
+                                    <div id="comments">
+                                        <form id="update-comment-form" action="/projects/<%= project._id %>/<%= i %>/save" method="post">
+                                            <textarea id="commentField<%= i %>" name="body" rows="5" class="w-100 form-control bg-white" disabled><%= project.comments[i].body %></textarea>
+                                            <span class="texte-white fs-6 d-block"><%= project.comments[i].dateOfComment.toLocaleDateString() %></span>
+                                            <% if(project.comments[i].authorId.equals(userId)) {%>
+                                                <a id="update-btn" href="#commentField<%= i %>" class="d-inline fs-6 text-warning">
+                                                    Modifier
+                                                </a>
+                                                <a href="/projects/<%= project._id %>/<%= i %>" id="delete-btn" class="d-inline fs-6 text-danger">
+                                                    Supprimer
+                                                </a>    
+                                                <button type="submit" id="submit-btn" class="d-none">Enregistrer</button>
+                                            <% } %>
+                                        </form>
+                                    </div>
+                                </li>
+                            <% } %>
+                        </ul>
                     <% } %>
-                </ul>
-                <!-- pagination -->
-                <div id="pagination" class="my-3">
-                    <div id="prevButton"></div>
-                    <div id="pageButtons"></div>
-                    <div id="nextButton"></div>
                 </div>
+            <% } %>
+                <!-- pagination -->
+            <div id="pagination" class="my-3">
+                <div id="prevButton"></div>
+                <div id="pageButtons"></div>
+                <div id="nextButton"></div>
             </div>
-        </div>
+        </main>
         <!-- Footer-->
         <%- include('../layout/footer.ejs') %>
         <!-- Bootstrap core JS-->
@@ -84,5 +114,7 @@
         <%- include('../layout/script.ejs') %>
         <!-- Pagination JS-->
         <%- include('../layout/paginationScript.ejs') %>
+        <!-- Update the comments JS-->
+        <%- include('../layout/updateCommentScript.ejs') %>
     </body>
 </html>

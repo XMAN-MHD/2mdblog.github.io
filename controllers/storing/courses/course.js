@@ -28,7 +28,7 @@ const storePost = (req, res) => {
                      }
                      else
                      {
-                        return res.redirect('/')
+                        return res.redirect('/courses')
                      } 
                  } 
              )

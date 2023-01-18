@@ -11,72 +11,90 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h5><%= course.title %></h5>
-                            <p>
-                                Posté par
-                                <a href="/users/<%= course.userId._id %>" style="color: white;"><%= course.userId.username %></a>
-                                <%= course.postDate.toDateString() %>
-                            </p>
+                            <% if(course !== null && typeof course !== undefined) {%>
+                                <h5><%= course.title %></h5>
+                                <p>
+                                    Posté par
+                                    <a href="/users/<%= course.userId._id %>" style="color: white;"><%= course.userId.username %></a>
+                                    <%= course.postDate.toDateString() %>
+                                </p>
+                            <% }%>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
         <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
-             <!-- delete and update links -->
-             <% if(deletePost) {%>
+        <main class="container px-4 px-lg-5">
+            <!-- delete and update links -->
+            <% if(deletePost && deletePost !== undefined) { %>
                 <p class="container px-4 px-lg-5 text-end">
-                    <a href="/courses/<%= course._id %>/update" class="btn btn-warning text-uppercase text-decoration-none">
+                    <a href="/courses/<%= course._id %>/update" class="text-warning mx-2 text-uppercase text-decoration-none">
                         Modifier
                     </a>
-                    <a href="/courses/<%= course._id %>/delete" class="btn btn-danger text-uppercase text-decoration-none">
+                    <a href="/courses/<%= course._id %>/delete" class="text-danger mx-2 text-uppercase text-decoration-none">
                         Supprimer
                     </a>
                 </p>
             <% }%>
-            <!-- Post Content-->
-             <article class="container px-4 px-lg-5 mobile-text">
-                <%- course.message %>
-            </article>
+            <% if(course !== null && typeof course !== undefined) {%>
+                <!-- course post Content-->
+                <article class="container px-4 px-lg-5 mobile-text">
+                    <%- course.message %>
+                </article>
+            <% }%>
+            <!-- Texte warning to log in for commenting post -->
+            <% if(!loggedIn) {%>
+                <p class="text-custom-color text-center" style="color: red">Connectez-vous pour laisser un commentaire</p>
+            <% }%>
             <!-- Send a new comment -->
-            <div class="container px-4 px-lg-5">
-                <% if(!loggedIn) {%>
-                    <p class="text-custom-color text-center" style="color: red">Connectez-vous pour laisser un commentaire</p>
-                <% }%>
-                <h6>Laisser un commentaire</h6>
-                <form action="/courses/<%= course._id %>/comments/new" method="POST">
-                    <div class="form-group mb-4">
-                        <textarea name="body" class="form-control w-100" rows="5"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
-                </form>
-            </div>
+            <ul id="items" class="container px-4 px-lg-5 list-group mb-3">
+                <li class="list-group-item post-bg"> 
+                    <h6 class="texte-white">Laisser un commentaire</h6>
+                    <form action="/courses/<%= course._id %>/comments/new" method="POST">
+                        <div class="form-group mb-4">
+                            <textarea name="body" class="form-control w-100" rows="5"></textarea>
+                        </div>
+                        <button type="submit" class="btn bgWhite white-hover bgPurple-hover">Envoyer</button>
+                    </form>
+                </li>
+            </ul>
             <!-- Display the Comments -->
-            <div class="container px-4 px-lg-5 my-5">
-                <!-- title -->
-                <h6>Commentaires</h6>
-                <!-- list of comments -->
-                <ul id="items" class="list-group mb-3">
-                    <% for(var i = 0; i < course.comments.length; i++) { %>
-                        <li class="list-group-item">
-                            <p>
-                                <a href="/users/<%= course.comments[i].authorId %>" class="text-decoration-underline"><%= course.comments[i].author %></a>
-                                <br>
-                                <%= course.comments[i].body %>
-                            </p>  
-                            <span class="text-muted fs-6"><%= course.comments[i].dateOfComment.toLocaleDateString() %></span>
-                        </li>
+            <% if(course !== null && typeof course !== undefined) {%>
+                <div class="container px-4 px-lg-5 ">    
+                    <!-- title -->
+                    <h6>Commentaires</h6>
+                    <!-- list of comments -->
+                    <% if( course.comments !== null && typeof course.comments !== undefined && course.comments.length > 0 ) {%>
+                        <ul id="items" class="list-group mb-3">
+                            <!-- comment -->
+                            <% for(var i = 0; i < course.comments.length; i++) { %>
+                                <li class="list-group-item bgPurple-hover comment-bg">
+                                    <a href="/users/<%= course.comments[i].authorId %>" class="texte-white black-hover"><%= course.comments[i].author %></a>
+                                    <div id="comments">
+                                        <form id="update-comment-form" action="/courses/<%= course._id %>/<%= i %>/save" method="post">
+                                            <textarea id="commentField<%= i %>" name="body" rows="5" class="w-100 form-control bg-white" disabled><%= course.comments[i].body %></textarea>
+                                            <span class="texte-white fs-6 d-block"><%= course.comments[i].dateOfComment.toLocaleDateString() %></span>
+                                            <% if(course.comments[i].authorId.equals(userId)) {%>
+                                                <a id="update-btn" href="#commentField<%= i %>" class="d-inline fs-6 text-warning">Modifier</a>
+                                                <a href="/courses/<%= course._id %>/<%= i %>" id="delete-btn" class="d-inline fs-6 text-danger">Supprimer</a>    
+                                                <button type="submit" id="submit-btn" class="d-none">Enregistrer</button>
+                                            <% } %>
+                                        </form>
+                                    </div>
+                                </li>
+                            <% } %>
+                        </ul>
                     <% } %>
-                </ul>
-                <!-- pagination -->
-                <div id="pagination" class="my-3">
-                    <div id="prevButton"></div>
-                    <div id="pageButtons"></div>
-                    <div id="nextButton"></div>
                 </div>
+            <% }%>
+            <!-- pagination -->
+            <div id="pagination" class="my-3">
+                <div id="prevButton"></div>
+                <div id="pageButtons"></div>
+                <div id="nextButton"></div>
             </div>
-        </div>
+        </main>
         <!-- Footer-->
         <%- include('../layout/footer.ejs') %>
         <!-- Bootstrap core JS-->
@@ -84,5 +102,7 @@
         <%- include('../layout/script.ejs') %>
         <!-- Pagination JS-->
         <%- include('../layout/paginationScript.ejs') %>
+        <!-- Update the comments JS-->
+        <%- include('../layout/updateCommentScript.ejs') %>
     </body>
 </html>

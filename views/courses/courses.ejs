@@ -20,24 +20,36 @@
         </header>
         <!-- Main Content-->
         <main class="container px-4 px-lg-5">
-            <!-- texte -->
+                <!-- texte -->
                 <p class="container px-4 px-lg-5 mobile-text">
                     Êtes-vous prêt à faire progresser votre carrière avec des compétences en développement web ? 2MD est le choix idéal pour des cours en ligne de qualité enseignés par un enseignant talentueux et un développeur web expérimenté. Avec 2MD, vous aurez le soutien et les conseils nécessaires pour réussir dans le domaine concurrentiel du développement web. N'attendez plus pour investir dans votre avenir - inscrivez-vous aux cours de 2MD dès maintenant !    
                 </p>
-            <!-- posts content -->
+                <!-- Search Bar -->
                 <div class="container px-4 px-lg-5">
-                    <% if( (coursesPosts !== null) && (coursesPosts.length > 0) ) { %>
+                    <div class="search-container">
+                        <form action="/search/courses">
+                            <input type="text" name="q" placeholder="Titre article..." required>
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <!-- courses posts -->
+                <div class="container px-4 px-lg-5 mt-5">
+                    <!-- list of posts -->
+                    <% if( (coursesPosts !== null) && (coursesPosts.length > 0) && (typeof coursesPosts !== undefined)) { %>
                         <ul id="items" class="list-group">
+                            <!-- post preview -->
                             <% for(var i = coursesPosts.length - 1; i >= 0; i--) { %>
-                                <li class="list-group-item">
-                                    <!-- Post preview-->
-                                    <div style="min-height: 150px;">
-                                        <a href="courses/<%= coursesPosts[i]._id %>">
+                                <li class="list-group-item post-bg bgPurple-hover border-white">
+                                    <div style="height: 150px; overflow-y: auto;">
+                                        <a href="courses/<%= coursesPosts[i]._id %>" class="texte-white black-hover">
                                             <h5><%= coursesPosts[i].title %></h5>
                                         </a>
-                                        <p class="text-muted">
+                                        <p class="texte-white post-meta-texte-size">
                                             Posté par
-                                            <a href="/users/<%= coursesPosts[i].userId._id %>"><%= coursesPosts[i].userId.username %></a>
+                                            <a href="/users/<%= coursesPosts[i].userId._id %>" class="texte-white black-hover post-meta-texte-size">
+                                                <%= coursesPosts[i].userId.username %>
+                                            </a>
                                             <%= coursesPosts[i].postDate.toDateString() %>
                                         </p>
                                     </div>
@@ -46,12 +58,47 @@
                         </ul>
                     <% } %>
                 </div>
-            <!-- pagination -->
-                <div id="pagination">
+                <!-- pagination -->
+                <div id="pagination" class="mb-3">
                     <div id="prevButton"></div>
                     <div id="pageButtons"></div>
                     <div id="nextButton"></div>
-                </div> 
+                </div>
+                <!-- button to see all the posts -->
+                <% if(searching) { %>
+                    <!-- Click the button show all the courses posts-->
+                    <div class="d-flex justify-content-end y-4 mb-3 px-4 px-lg-5 mb-3">
+                        <a href="/courses" class="btn btn-dark text-uppercase bgPurple-hover">
+                            Voir tous
+                        </a>
+                    </div>
+                <% } %>
+                <!-- the comments on the recent posts if we have at least 5 items-->
+                <% if(!searching) { %>
+                    <% if( (coursesPosts !== null) && (coursesPosts.length > 3 ) && (typeof coursesPosts !== undefined)) { %>
+                    <div class="container px-4 px-lg-5 mb-3">
+                        <h6 style="margin: 20px 0;">Les commentaires sur les articles récents</h6>
+                            <ul class="list-group">
+                                <!-- comment-->
+                                <% for(var j = coursesPosts.length - 1; j > coursesPosts.length - 4; j--) { %>
+                                    <% if( (coursesPosts[j].comments !== null) && (coursesPosts[j].comments.length > 0) && (typeof coursesPosts[j].comments !== undefined)) { %>
+                                    <li class="list-group-item comment-bg bgPurple-hover border-white">
+                                        <a href="courses/<%= coursesPosts[j]._id %>">
+                                            <h5 class="texte-white black-hover"><%= coursesPosts[j].title %></h5>
+                                        </a>
+                                        <p>
+                                            <a href="/users/<%= coursesPosts[j].comments[0].authorId %>" class="text-decoration-none texte-white black-hover "><%= coursesPosts[j].comments[0].author %></a>
+                                            <br>
+                                            <textarea class="form-control w-100 bg-white" disabled rows="5"><%= coursesPosts[j].comments[0].body %></textarea>
+                                        </p>  
+                                        <span class="fs-6 text-white black-hover"><%= coursesPosts[j].comments[0].dateOfComment.toLocaleDateString() %></span>
+                                    </li>
+                                    <% } %>
+                                <% } %>
+                            </ul>
+                    </div>
+                    <% } %>
+                <% } %>
         </main>
         <!-- Footer-->
         <%- include('../layout/footer.ejs') %>

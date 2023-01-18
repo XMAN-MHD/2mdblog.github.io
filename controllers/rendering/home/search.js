@@ -1,8 +1,11 @@
 const BlogPostModel = require('../../../models/blog/BlogPost');
 
-const searchBlogPosts = async (req, res) => {
+const search = async (req, res) => {
+  // check if we ara searching
   let searching = true;
+  // get the queries form the search bar
   const searchQuery = req.query.q;
+  // search for the posts that match queries using operators and indexes
   const posts = await BlogPostModel.find({
     $text:{ 
       $search: searchQuery, 
@@ -10,13 +13,14 @@ const searchBlogPosts = async (req, res) => {
       $diacriticSensitive: false 
     }
   }).populate({path:'userId', select:['_id', 'username']});
+  // render the view
   res.render(
     'home/home.ejs',
     {
-      posts: posts, 
-      searching: searching
+      posts, 
+      searching
     }
   );
 }
 
-module.exports = searchBlogPosts;
+module.exports = search;

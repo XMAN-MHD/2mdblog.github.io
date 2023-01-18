@@ -14,6 +14,11 @@ const CoursesPostSchema = new mongoose.Schema({
     userId: {type: mongoose.Schema.Types.ObjectId, ref: UserModel, required: true}, 
     postDate: { type: Date, default: new Date() }
 })
+// create indexes to search for posts using queries and not using IDs   
+// indexes tell mongoose to search for documents  using the specied field's values and work together with operators 
+CoursesPostSchema.index(
+    { title: 'text' }
+);
 /*
     post model(collection)
 */ 
