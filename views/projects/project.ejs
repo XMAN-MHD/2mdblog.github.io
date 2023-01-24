@@ -83,7 +83,7 @@
                                         <form id="update-comment-form" action="/projects/<%= project._id %>/<%= i %>/save" method="post">
                                             <textarea id="commentField<%= i %>" name="body" rows="5" class="w-100 form-control bg-white" disabled><%= project.comments[i].body %></textarea>
                                             <span class="texte-white fs-6 d-block"><%= project.comments[i].dateOfComment.toLocaleDateString() %></span>
-                                            <% if(project.comments[i].authorId.equals(userId)) {%>
+                                            <% if(project.comments[i].authorId.equals(userId) || Admin) {%>
                                                 <a id="update-btn" href="#commentField<%= i %>" class="d-inline fs-6 text-warning">
                                                     Modifier
                                                 </a>

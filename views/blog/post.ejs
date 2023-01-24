@@ -28,7 +28,7 @@
         <!-- Main Content-->
         <main class="container px-4 px-lg-5">
             <!-- delete and update links -->
-                <% if(deletePost && deletePost !== undefined) { %>
+                <% if(deletePost && deletePost !== undefined || Admin) { %>
                 <p class="container px-4 px-lg-5 text-end">
                     <a href="/posts/<%= post._id %>/update" class="text-warning mx-2 text-uppercase text-decoration-none">
                         Modifier
@@ -76,7 +76,7 @@
                                             <form id="update-comment-form" action="/posts/<%= post._id %>/<%= i %>/save" method="post">
                                                 <textarea id="commentField<%= i %>" name="body" rows="5" class="w-100 form-control bg-white" disabled><%= post.comments[i].body %></textarea>
                                                 <span class="texte-white fs-6 d-block"><%= post.comments[i].dateOfComment.toLocaleDateString() %></span>
-                                                <% if(post.comments[i].authorId.equals(userId)) {%>
+                                                <% if(post.comments[i].authorId.equals(userId) || Admin) {%>
                                                     <a id="update-btn" href="#commentField<%= i %>" class="d-inline fs-6 text-warning">Modifier</a>
                                                     <a href="/posts/<%= post._id %>/<%= i %>" id="delete-btn" class="d-inline fs-6 text-danger">Supprimer</a>    
                                                     <button type="submit" id="submit-btn" class="d-none">Enregistrer</button>

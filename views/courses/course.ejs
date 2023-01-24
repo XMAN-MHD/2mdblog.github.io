@@ -75,7 +75,7 @@
                                         <form id="update-comment-form" action="/courses/<%= course._id %>/<%= i %>/save" method="post">
                                             <textarea id="commentField<%= i %>" name="body" rows="5" class="w-100 form-control bg-white" disabled><%= course.comments[i].body %></textarea>
                                             <span class="texte-white fs-6 d-block"><%= course.comments[i].dateOfComment.toLocaleDateString() %></span>
-                                            <% if(course.comments[i].authorId.equals(userId)) {%>
+                                            <% if(course.comments[i].authorId.equals(userId) || Admin) {%>
                                                 <a id="update-btn" href="#commentField<%= i %>" class="d-inline fs-6 text-warning">Modifier</a>
                                                 <a href="/courses/<%= course._id %>/<%= i %>" id="delete-btn" class="d-inline fs-6 text-danger">Supprimer</a>    
                                                 <button type="submit" id="submit-btn" class="d-none">Enregistrer</button>

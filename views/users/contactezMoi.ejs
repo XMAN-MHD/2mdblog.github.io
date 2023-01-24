@@ -36,7 +36,11 @@
                             <!-- To make this form functional, sign up at-->
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
-                            <form id="contactForm" method="POST">
+                            <form id="contactForm" method="POST" action="http://localhost:4000/contact">
+                                <div class="form-floating">
+                                    <input name="subject" class="form-control" id="subject" type="text" placeholder="objet..." />
+                                    <label for="subject">Objet</label>
+                                </div>
                                 <div class="form-floating">
                                     <input name="name" class="form-control" id="name" type="text" placeholder="saisir votre prenom et nom..." />
                                     <label for="name">Prénom et Nom</label>

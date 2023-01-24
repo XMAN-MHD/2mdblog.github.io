@@ -9,7 +9,7 @@
         <ul class="navbar-nav ms-auto py-4 py-lg-0">
             <li class="nav-item" ><a style="color: white" class="nav-link px-lg-3 py-3 py-lg-4" href="/">Accueil</a></li>
             <% if(loggedIn) {%>
-                <% if(Username === '2MD') {%>
+                <% if(Admin) {%>
                 <li id="subnav" class="nav-item dropdown" >
                     <a id="subnav-button" class="dropdown-toggle nav-link px-lg-3 pt-3 pt-lg-4" style="color: white" data-bs-toggle="dropdown" href="#">Publier</a>
                     <ul id="subnav-content" class="dropdown-menu">
@@ -19,7 +19,7 @@
                     </ul>
                 </li>
                 <% } %>
-                <% if(Username !== '2MD') { %>
+                <% if(!Admin) { %>
                     <li class="nav-item" ><a class="nav-link px-lg-3 py-3 py-lg-4" href="/posts/new"  style="color: white">Publier</a></li>
                 <% } %>
             <% } %>

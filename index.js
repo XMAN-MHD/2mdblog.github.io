@@ -3,10 +3,18 @@
 */
 global.LoggedIn = false;  
 global.Username = '';  
+global.Admin = '';  
+/*
+    define variables
+*/
+const adminEmail = 'mouhameddiouf093@gmail.com'; 
 /*
     references to modules
 */ 
     // packages
+require('dotenv').config();
+console.log(process.env)
+const nodeMailer = require('nodemailer')
 const express = require('express');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
@@ -26,6 +34,7 @@ const storeProjectController = require('./controllers/storing/projects/project')
 const storeBlogPostCommentController = require('./controllers/storing/blog/comment');
 const storeCoursesPostCommentController = require('./controllers/storing/courses/comment');
 const storeProjectsPostCommentController = require('./controllers/storing/projects/comment');
+const storeUserMailController = require('./controllers/storing/users/mail');
 const renderHomeController = require('./controllers/rendering/home/home');
 const renderContactController = require('./controllers/rendering/users/contactezMoi');
 const renderAuthLoginController = require('./controllers/rendering/users/authLogin');
@@ -114,23 +123,36 @@ app.use('/auth/register', keepUsersOutMiddleware);
 // custom middleware allow the front-end to know whether the user has a session or not 
 app.use(
     '*',
-    (req, res, next) => {
+    async (req, res, next) => {
         loggedIn = req.session.userId;
         if(loggedIn)
         {
-            UserModel.findById(
-                req.session.userId,
-                (e, user) => {
-                    if(!e)
+            try
+            {
+                const user = await UserModel.findById(req.session.userId);
+                if(user)
+                {
+                    Username = user.username;
+                    const userEmail = user.email;
+                    if(Object.is(adminEmail,userEmail))
                     {
-                        Username = user.username;
+                        Admin = true;
                     }
-                } 
-            );
+                    else 
+                    {
+                        Admin = false
+                    }
+                }
+            }
+            catch(err)
+            {
+                console.error(err);
+            }
         }
         next();
     }
-)  
+)
+
 /*
     handle get request
 */ 
@@ -182,6 +204,7 @@ app.post('/projets/store', storeProjectController);
 app.post('/projects/:id/comments/new', keepVisitorsOutMiddleware, storeProjectsPostCommentController);
 app.post('/projects/:id/save', saveUpdatedProjectsPostController);
 app.post('/projects/:projectId/:commentId/save', updateProjectsPostCommentController);
+app.post('/contact',keepVisitorsOutMiddleware, storeUserMailController);
 /*
     Handle not found request
 */
