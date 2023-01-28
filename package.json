@@ -18,7 +18,9 @@
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
     "fileupload": "^1.0.0",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.1",
+    "node-schedule": "^2.1.1",
     "nodemailer": "^6.9.0",
     "nodemon": "^2.0.20",
     "path": "^0.12.7"

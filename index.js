@@ -11,9 +11,9 @@ const adminEmail = 'mouhameddiouf093@gmail.com';
 /*
     references to modules
 */ 
-    // packages
+    // packages or libraries
 require('dotenv').config();
-console.log(process.env)
+const schedule = require('node-schedule'); // to schedule a job or task in the background
 const nodeMailer = require('nodemailer')
 const express = require('express');
 const ejs = require('ejs');
@@ -26,6 +26,7 @@ const UserModel = require('./models/users/User');
     //controllers 
 const logoutUserController = require('./controllers/getting/users/logoutUser');
 const renderBlogPostController = require('./controllers/rendering/blog/post');
+const getVerifyEmailController = require('./controllers/getting/users/verifyEmail');
 const getUserLoginController = require('./controllers/getting/users/userLogin');
 const storeUserController = require('./controllers/storing/users/user');
 const storePostController = require('./controllers/storing/blog/post');
@@ -34,7 +35,7 @@ const storeProjectController = require('./controllers/storing/projects/project')
 const storeBlogPostCommentController = require('./controllers/storing/blog/comment');
 const storeCoursesPostCommentController = require('./controllers/storing/courses/comment');
 const storeProjectsPostCommentController = require('./controllers/storing/projects/comment');
-const storeUserMailController = require('./controllers/storing/users/mail');
+const storeUserMailController = require('./controllers/storing/users/mailMe');
 const renderHomeController = require('./controllers/rendering/home/home');
 const renderContactController = require('./controllers/rendering/users/contactezMoi');
 const renderAuthLoginController = require('./controllers/rendering/users/authLogin');
@@ -72,6 +73,8 @@ const checkEmptyRegistrationFieldsMiddleware = require('./middlewares/users/chec
 const checkEmptyLoginFieldsMiddleware = require('./middlewares/users/checkEmptyLoginFields'); 
 const keepUsersOutMiddleware = require('./middlewares/users/keepUsersOut'); 
 const keepVisitorsOutMiddleware = require('./middlewares/users/keepVisitorsOut');
+    // utils 
+const deleteUnverifiedUserUtils = require('./utils/delete/users/unverified');
 /*
     server
 */
@@ -161,6 +164,7 @@ app.get('/search/blog', renderSearchedBlogPostController);
 app.get('/contacte', renderContactController);
 app.get('/auth/login', renderAuthLoginController);
 app.get('/auth/register', renderAuthRegisterController);
+app.get('/verify/:token', getVerifyEmailController);
 app.get('/users/account',keepVisitorsOutMiddleware, renderUserAccountController);
 app.get('/users/logout',keepVisitorsOutMiddleware, logoutUserController);
 app.get('/users/2md', renderUser2mdController);
@@ -205,6 +209,10 @@ app.post('/projects/:id/comments/new', keepVisitorsOutMiddleware, storeProjectsP
 app.post('/projects/:id/save', saveUpdatedProjectsPostController);
 app.post('/projects/:projectId/:commentId/save', updateProjectsPostCommentController);
 app.post('/contact',keepVisitorsOutMiddleware, storeUserMailController);
+/*
+    background tast
+*/
+schedule.scheduleJob('0 * * * *', deleteUnverifiedUserUtils); 
 /*
     Handle not found request
 */

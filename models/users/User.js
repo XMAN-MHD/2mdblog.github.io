@@ -13,10 +13,13 @@ const UserSchema = new mongoose.Schema({
     password: { type: String, required: true, unique: true },
     phone: { type: Number, required: true, unique: true },
     message: { type: String, required: true },
-    profileImage: { type: String, required: true }
+    profileImage: { type: String, required: true },
+    token: { type: String },
+    isVerified: { type: Boolean, default: false }, 
+    createAt: { type: Date, default: Date.now() }
 })
 /*
-    hash the password before to save it
+    hash the password before to save the data
 */ 
 UserSchema.pre(
     'save', 
