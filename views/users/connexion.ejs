@@ -29,6 +29,20 @@
                             il vous suffit de remplir le formulaire de connexion. Cela ne prend que quelques minutes et vous permettra de profiter pleinement de tout ce que notre plateforme a à offrir. 
                             N'hésitez pas à le faire dès maintenant pour accéder à toutes les possibilités de publication de contenu sur notre site.
                         </p>
+                        <br><br>
+                        <span>
+                            Avez-vous un compte ? créer un compte en cliquant 
+                            <a href="/auth/register" style="color:red; text-decoration: underline;">
+                                ici
+                            </a>
+                        </span> 
+                        <!-- display validation errors -->
+                        <br><br>                              
+                        <% if(errors !== undefined && Object.keys(errors).length !== 0) { %>
+                            <div class="mobile-text bg-danger texte-white p-2">
+                                <%= errors %>
+                            </div>
+                        <% } %> 
                         <!-- formulaire -->
                         <div class="my-5">
                             <!-- * * * * * * * * * * * * * * *-->
@@ -50,13 +64,6 @@
                                 <br />
                                 <!-- Submit Button-->
                                 <button class="btn bgPurple texte-white text-uppercase" id="submitButton" type="submit">Connexion</button> 
-                                <br><br>
-                                <span>
-                                    Avez-vous un compte ? créer un compte en cliquant 
-                                    <a href="/auth/register" style="color:red; text-decoration: underline;">
-                                        ici
-                                    </a>
-                                </span>
                             </form>
                         </div>
                     </div>

@@ -6,7 +6,6 @@ const BlogPostModel = require('../../../models/blog/BlogPost');
 const UserModel = require('../../../models/users/User');
 
 const storeComment = async (req, res) => {
-    // get the author of the comment
     let authorOfComment = null; 
     let authorIdOfComment = null;
     // retrieve current user
@@ -14,6 +13,7 @@ const storeComment = async (req, res) => {
     // get the id and username if  the user  is retrieved
     if(user)
     {
+        // get the author of the comment
         authorIdOfComment = user._id;
         authorOfComment = user.username;
         // get the current blog post by its id send as params in the url 

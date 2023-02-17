@@ -48,7 +48,7 @@
                 <p class="text-custom-color text-center" style="color: red">Connectez-vous pour laisser un commentaire</p>
             <% }%>
             <!-- Send a new comment -->
-            <ul id="items" class="container px-4 px-lg-5 list-group mb-3">
+            <ul id="items" class="container px-4 px-lg-5 list-group mb-3" style="margin-top: 100px">
                 <li class="list-group-item post-bg"> 
                     <h6 class="texte-white">Laisser un commentaire</h6>
                     <form action="/courses/<%= course._id %>/comments/new" method="POST">
@@ -64,6 +64,14 @@
                 <div class="container px-4 px-lg-5 ">    
                     <!-- title -->
                     <h6>Commentaires</h6>
+                    <br>
+                    <!-- display validation errors -->
+                    <% if(commentsErrors !== undefined && Object.keys(commentsErrors).length !== 0) { %>
+                        <div class="mobile-text bg-danger texte-white p-2">
+                            <%= commentsErrors %>
+                        </div>
+                        <br>
+                    <% } %>                          
                     <!-- list of comments -->
                     <% if( course.comments !== null && typeof course.comments !== undefined && course.comments.length > 0 ) {%>
                         <ul id="items" class="list-group mb-3">

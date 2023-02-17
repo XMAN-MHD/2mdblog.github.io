@@ -4,14 +4,17 @@
 global.LoggedIn = false;  
 global.Username = '';  
 global.Admin = '';  
+
 /*
     define variables
 */
 const adminEmail = 'mouhameddiouf093@gmail.com'; 
+
 /*
-    references to modules
+    module references
 */ 
-    // packages or libraries
+
+// libraries or packages
 require('dotenv').config();
 const schedule = require('node-schedule'); // to schedule a job or task in the background
 const nodeMailer = require('nodemailer')
@@ -21,9 +24,12 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const expressFileUpload = require('express-fileupload');
 const expressSession = require('express-session');
-    // user model
+const flash = require('connect-flash'); // flash is a middleware to temporary store messages and remove it after displayed
+
+// user model
 const UserModel = require('./models/users/User');
-    //controllers 
+
+//controllers 
 const logoutUserController = require('./controllers/getting/users/logoutUser');
 const renderBlogPostController = require('./controllers/rendering/blog/post');
 const getVerifyEmailController = require('./controllers/getting/users/verifyEmail');
@@ -36,6 +42,7 @@ const storeBlogPostCommentController = require('./controllers/storing/blog/comme
 const storeCoursesPostCommentController = require('./controllers/storing/courses/comment');
 const storeProjectsPostCommentController = require('./controllers/storing/projects/comment');
 const storeUserMailController = require('./controllers/storing/users/mailMe');
+const renderNotFoundController = require('./controllers/rendering/404/notFound');
 const renderHomeController = require('./controllers/rendering/home/home');
 const renderContactController = require('./controllers/rendering/users/contactezMoi');
 const renderAuthLoginController = require('./controllers/rendering/users/authLogin');
@@ -68,17 +75,29 @@ const updateProjectsPostCommentController = require('./controllers/updating/proj
 const saveUpdatedCoursesPostController = require('./controllers/updating/courses/save');
 const saveUpdatedBlogPostController = require('./controllers/updating/blog/save');
 const saveUpdatedProjectsPostController = require('./controllers/updating/projects/save');
-    //custom middlewares 
-const checkEmptyRegistrationFieldsMiddleware = require('./middlewares/users/checkEmptyRegistrationFields'); 
-const checkEmptyLoginFieldsMiddleware = require('./middlewares/users/checkEmptyLoginFields'); 
-const keepUsersOutMiddleware = require('./middlewares/users/keepUsersOut'); 
-const keepVisitorsOutMiddleware = require('./middlewares/users/keepVisitorsOut');
-    // utils 
+    
+//custom middlewares 
+const verifyIsLogOutMiddleware = require('./middlewares/verify/isLogOut'); 
+const verifyIsLogInMiddleware = require('./middlewares/verify/isLogIn');
+const verifyUserAccountMiddleware = require('./middlewares/verify/account');
+const sanitizeSignInMiddleware = require('./middlewares/sanitize/users/signIn');
+const sanitizeSignUpMiddleware = require('./middlewares/sanitize/users/signUp');
+const sanitizeBlogpostMiddleware = require('./middlewares/sanitize/blog/post');
+const sanitizeUpdatedPostMiddleware = require('./middlewares/sanitize/blog/updatedPost');
+const sanitizeUsersNewCommentInputMiddleware = require('./middlewares/sanitize/blog/newPostComment');
+const sanitizeCoursesNewPostMiddleware = require('./middlewares/sanitize/courses/newPost');
+const sanitizeCoursesUpdatedPostMiddleware = require('./middlewares/sanitize/courses/updatedPost');
+const sanitizeCoursesNewPostCommentMiddleware = require('./middlewares/sanitize/courses/newPostComment');
+
+    
+// utils 
 const deleteUnverifiedUserUtils = require('./utils/delete/users/unverified');
+
 /*
     server
 */
 const app = new express();
+
 /*
     connect to my mongo databasse server
 */
@@ -94,6 +113,7 @@ mongoose.connect(
         }
     }
 )
+
 /*
     port
 */
@@ -104,25 +124,22 @@ app.listen(port, () => {console.log('Express server listening on port 4000')});
     provide the static files
 */
 app.use(express.static('public')); 
+
 /*
     set a view engine(ejs)
 */ 
 app.set('view engine', 'ejs');
+
 /*
     middlewares
 */
-    // middleware body-parser.json() and body-parser.urlencoded() parse the req.body to make available form datas 
+// middleware body-parser.json() and body-parser.urlencoded() parse the req.body to make available form datas 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-    // middleware express-fileupload upload the files into the req.file object
+// middleware express-fileupload upload the files into the req.file object
 app.use(expressFileUpload());
-    // custom middleware checkEmptyFields from user registration and login interface
-app.use("/users/new", checkEmptyRegistrationFieldsMiddleware); 
-app.use("/users/login", checkEmptyLoginFieldsMiddleware);
-    // middleware express-session use the req.session object to save the session ID into browser's cookies then sign the user and encrypt its sessionID to keep the user log in
+// middleware express-session use the req.session object to save the session ID into browser's cookies then sign the user and encrypt its sessionID to keep the user log in
 app.use(expressSession({secret: 'keyboard cat'}));  
-    // custum middleware to prevent an authentificated use to log in or to register 
-app.use('/auth/register', keepUsersOutMiddleware);   
 // custom middleware allow the front-end to know whether the user has a session or not 
 app.use(
     '*',
@@ -155,18 +172,22 @@ app.use(
         next();
     }
 )
+//middleware flash 
+app.use(flash());
 
 /*
     handle get request
 */ 
 app.get('/', renderHomeController);
+app.get('/404', renderNotFoundController);
 app.get('/search/blog', renderSearchedBlogPostController);
 app.get('/contacte', renderContactController);
 app.get('/auth/login', renderAuthLoginController);
-app.get('/auth/register', renderAuthRegisterController);
+app.get('/auth/register',verifyIsLogOutMiddleware, renderAuthRegisterController);
+app.get('/users/auth/register',verifyIsLogOutMiddleware, renderAuthRegisterController);
 app.get('/verify/:token', getVerifyEmailController);
-app.get('/users/account',keepVisitorsOutMiddleware, renderUserAccountController);
-app.get('/users/logout',keepVisitorsOutMiddleware, logoutUserController);
+app.get('/users/account',verifyIsLogInMiddleware, renderUserAccountController);
+app.get('/users/logout',verifyIsLogInMiddleware, logoutUserController);
 app.get('/users/2md', renderUser2mdController);
 app.get('/users/:user', renderRequestedUserController);
 app.get('/projets', renderProjectsController);
@@ -177,7 +198,7 @@ app.get('/projects/:id/delete', deleteProjectsPostController)
 app.get('/projects/:id/update', updateProjectsPostController)
 app.get('/projects/:projectId/:commentId', deleteProjectPostCommentController)
 app.get('/search/projects', renderSearchedProjectsPostController);
-app.get('/posts/new',keepVisitorsOutMiddleware, renderNewPostController);
+app.get('/posts/new',verifyIsLogInMiddleware, renderNewPostController);
 app.get('/posts/:id', renderBlogPostController);
 app.get('/search/posts/:id', renderBlogPostController);
 app.get('/posts/:id/delete', deleteBlogPostController)  
@@ -194,21 +215,21 @@ app.get('/search/courses', renderSearchedCoursesPostController);
 /*
     handle post request
 */
-app.post('/users/new', storeUserController); 
-app.post('/users/login', getUserLoginController); 
-app.post('/posts/store', storePostController);
-app.post('/posts/:id/save', saveUpdatedBlogPostController);
-app.post('/posts/:id/comments/new',keepVisitorsOutMiddleware, storeBlogPostCommentController);
-app.post('/posts/:postId/:commentId/save', updateBlogPostCommentController);
-app.post('/courses/store', storeCourseController);
-app.post('/courses/:id/comments/new',keepVisitorsOutMiddleware, storeCoursesPostCommentController);
-app.post('/courses/:id/save', saveUpdatedCoursesPostController);
-app.post('/courses/:courseId/:commentId/save', updateCoursesPostCommentController);
+app.post('/users/new', sanitizeSignUpMiddleware , storeUserController); 
+app.post('/users/login', sanitizeSignInMiddleware, getUserLoginController); 
+app.post('/posts/store',  verifyIsLogInMiddleware, verifyUserAccountMiddleware, sanitizeBlogpostMiddleware, storePostController);
+app.post('/posts/:id/save', verifyIsLogInMiddleware, verifyUserAccountMiddleware, sanitizeUpdatedPostMiddleware, saveUpdatedBlogPostController);
+app.post('/posts/:id/comments/new', verifyIsLogInMiddleware, verifyUserAccountMiddleware, sanitizeUsersNewCommentInputMiddleware, storeBlogPostCommentController);
+app.post('/posts/:postId/:commentId/save', verifyUserAccountMiddleware, sanitizeUsersNewCommentInputMiddleware, updateBlogPostCommentController);
+app.post('/courses/store',  verifyIsLogInMiddleware, sanitizeCoursesNewPostMiddleware, storeCourseController);
+app.post('/courses/:id/save',verifyIsLogInMiddleware, sanitizeCoursesUpdatedPostMiddleware, saveUpdatedCoursesPostController);
+app.post('/courses/:id/comments/new',verifyIsLogInMiddleware, sanitizeCoursesNewPostCommentMiddleware, storeCoursesPostCommentController);
+app.post('/courses/:courseId/:commentId/save', verifyIsLogInMiddleware, sanitizeCoursesNewPostCommentMiddleware, updateCoursesPostCommentController);
 app.post('/projets/store', storeProjectController);
-app.post('/projects/:id/comments/new', keepVisitorsOutMiddleware, storeProjectsPostCommentController);
+app.post('/projects/:id/comments/new', verifyIsLogInMiddleware, storeProjectsPostCommentController);
 app.post('/projects/:id/save', saveUpdatedProjectsPostController);
 app.post('/projects/:projectId/:commentId/save', updateProjectsPostCommentController);
-app.post('/contact',keepVisitorsOutMiddleware, storeUserMailController);
+app.post('/contact',verifyIsLogInMiddleware, storeUserMailController);
 /*
     background tast
 */

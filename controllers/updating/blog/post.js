@@ -9,13 +9,20 @@ const PostModel = require('../../../models/blog/BlogPost');
 const updatePost = async (req, res) => {
     // get the post id
     const postId = req.params.id;
+    // retrieve the errors from flash library
+    let errors = req.flash('validationErrors');
+    if(errors !== undefined) 
+    {
+        console.log('validation errors: ' + errors)
+    }
     // find the post
     const postToUpdate = await PostModel.findById(postId);
     res.render(
         'blog/updatePost', 
         {
             editor: true, 
-            postToUpdate:postToUpdate
+            postToUpdate:postToUpdate,
+            errors:errors
         } 
     );
 }

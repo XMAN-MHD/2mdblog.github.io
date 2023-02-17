@@ -13,13 +13,26 @@
           justify-content:center; 
           align-items:center;
         }
+        div
+        {
+          display:flex; 
+          flex-direction: column;
+        }
+        a
+        {
+          align-self: center;
+        }
     </style>
 </head>
 <body>
-    <main style="text-align:center;">
-        <div style="background-color:#198754; padding: 10px; color:white;" >    
-          <p style="color:white;"><b>Email verified successfully</b></p>
-          <a href="/" style="text-decoration:none; color:black;"><button style="width:70px; padding:5px" >OK</button></a>
+    <main>
+        <div style="background-color:#1D1D1D; padding: 10px; color:white;" >    
+          <p style="color: #198754; text-align:center;"><b>EMAIL VÉRIFIÉ AVEC SUCCÉS</b></p>
+          <p style="color:white">
+            Votre compte est vérifié, merci de partager <br>
+            vos pensés avec la communauté.
+          </p>
+          <a href="/auth/login" style="text-decoration:none; color:black;"><button style="width:70px; padding:5px" >OK</button></a>
         </div>
     </main>
 </body>

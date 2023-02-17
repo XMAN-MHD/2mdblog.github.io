@@ -37,9 +37,10 @@ const verifyEmail = (req, res) => {
         }
       );
     } 
-    catch (err) 
+    catch (error) 
     {
-      console.log(err.message);
+      console.error(error.message)
+      return res.redirect('/404')
     }    
     
 }

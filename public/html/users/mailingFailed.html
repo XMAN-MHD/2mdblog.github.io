@@ -13,12 +13,26 @@
           justify-content:center; 
           align-items:center;
         }
+        div
+        {
+          display:flex; 
+          flex-direction: column;
+        }
+        a
+        {
+          align-self: center;
+        }
     </style>
 </head>
 <body>
-    <main style="text-align:center;">
-      <div style="background-color:#F32013; padding: 10px; color:white;" >    
-        <p style="color:white;" ><b>error: </b>can not send verification link</p>
+    <main>
+      <div style="background-color:#1D1D1D; padding: 10px; color:white;" >    
+        <p style="color:#F32013; text-align:center;" >
+          <b>ECHEC CRÉATION COMPTE</b>
+        </p>
+        <p style="color:white;">
+          Le lien de vérification n'a pas été envoyé, réessayer encore. 
+        </p>
         <a href="/auth/register" style="text-decoration:none; color:black;" ><button style="width:70px; padding:5px" >OK</button></a>
       </div>
   </main>

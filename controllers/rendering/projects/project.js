@@ -33,9 +33,10 @@ const UserModel = require('../../../models/users/User');
                 }
             );
         }
-        catch(e)
+        catch(error)
         {
-            res.render('404/notFound')
+            console.error(error.message)
+            return res.redirect('/404')
         }
     }
     /*

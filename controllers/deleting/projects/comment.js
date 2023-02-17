@@ -23,7 +23,8 @@ const deleteComment = async (req, res) => {
         // return to the post view
         return res.redirect(`/projets/${projectId}`);
     } catch (error) {
-        return res.render('404/notFound')
+        console.error(error)
+        return res.redirect('/404')
     }
 }
 

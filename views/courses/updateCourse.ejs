@@ -29,6 +29,12 @@
                             Partager vos pensées et vos idées avec les autres est un moyen puissant de contribuer à la conversation et de faire entendre votre voix. En publiant un article, vous pouvez partager votre perspective unique avec un public plus large et participer à des discussions significatives avec d'autres. 
                             Alors n'hésitez pas à appuyer sur le bouton de publication et partager vos idées avec le monde !
                         </p>
+                        <!-- display validation errors -->
+                        <% if(errors !== undefined && Object.keys(errors).length !== 0) { %>
+                            <div class="mobile-text bg-danger texte-white p-2">
+                                <%= errors %>
+                            </div>
+                        <% } %>
                         <!-- formulaire -->
                         <div class="my-5">
                             <!-- * * * * * * * * * * * * * * *-->
@@ -39,20 +45,14 @@
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
                             <form id="contactForm" method="POST" action="/courses/<%= postToUpdate._id %>/save" enctype="multipart/form-data">
-                                <p class="text-danger">NB: Impossible de modifier l'article si le texte contient des images ou vidéos</p>
+                                <p class="text-danger">NB: Impossible de modifier ou ajouter des images ou vidéos</p>
                                 <div class="form-floating">
                                     <input name="title" value="<%= postToUpdate.title %>" class="form-control" id="title" type="text" placeholder="saisir votre titre..." />
                                     <label for="title">Titre</label>
                                 </div>
                                 <br><br>
-                                <div class="form-floating">
-                                    <textarea name="message" class="form-control" id="message" placeholder="saisir votre message ici..." style="height: 12rem" ></textarea>
-                                    <script>
-                                        $('#message').summernote(
-                                            'code', 
-                                            '<%- postToUpdate.message %>'
-                                        );
-                                    </script> 
+                                <div>
+                                    <textarea name="message" class="form-control" id="message" placeholder="saisir votre message ici..." style="height: 12rem" ><%= postToUpdate.message %></textarea>
                                 </div>
                                 <br />
                                 <div class="form-floating">

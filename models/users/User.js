@@ -3,14 +3,15 @@
 */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const uniqueValidator = require('mongoose-unique-validator');
 /*
     schema of user model
 */
 const UserSchema = new mongoose.Schema({
     name: { type: String, required: true },
     username: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique:true},
+    password: { type: String, required: true},
     phone: { type: Number, required: true, unique: true },
     message: { type: String, required: true },
     profileImage: { type: String, required: true },
@@ -18,6 +19,10 @@ const UserSchema = new mongoose.Schema({
     isVerified: { type: Boolean, default: false }, 
     createAt: { type: Date, default: Date.now() }
 })
+/*
+    use the plugin mongoose unique validator to handle fields with unique value
+*/ 
+UserSchema.plugin(uniqueValidator);
 /*
     hash the password before to save the data
 */ 

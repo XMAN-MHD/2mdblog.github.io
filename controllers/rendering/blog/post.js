@@ -1,7 +1,7 @@
 /*
    module references 
 */
-    // modelq
+    // model
     const PostModel = require('../../../models/blog/BlogPost');
     const UserModel = require('../../../models/users/User');
 
@@ -9,6 +9,12 @@
         controller
     */ 
     const post = async (req, res) => {
+        // retrieve the errors from flash library
+        let commentsErrors = req.flash('commentsValidationErrors');
+        if(commentsErrors !== undefined) 
+        {
+            console.log('validation errors: ' + commentsErrors)
+        }
         let deletePost = false;
         let userId = null;
         try{
@@ -30,13 +36,15 @@
                 {
                     post,
                     deletePost, 
-                    userId
+                    userId,
+                    commentsErrors
                 }
             );
         }
-        catch(e)
+        catch(error)
         {
-            res.render('404/notFound')
+            console.error(error.message)
+            return res.redirect('/404')
         }
     }
     /*

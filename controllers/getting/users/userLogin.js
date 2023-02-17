@@ -26,6 +26,7 @@ const toLoginUser = (req, res) => {
                         }
                         else
                         {
+                            req.flash('validationErrors', 'Email ou mot de passe invalide.');
                             return res.redirect('/auth/login');
                         }
                     }
@@ -33,6 +34,7 @@ const toLoginUser = (req, res) => {
             }
             else
             {
+                req.flash('validationErrors', 'Email ou mot de passe invalide.');
                 res.redirect('/auth/login'); 
             }
         }

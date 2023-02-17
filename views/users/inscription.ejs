@@ -28,6 +28,11 @@
                            Publier votre propre publication est un excellent moyen de partager vos pensées et idées avec un public plus large. Créer un compte avec nous est rapide et facile, et vous permettra de publier et d'interagir avec d'autres utilisateurs.
                            Alors, pourquoi attendre ? Inscrivez-vous maintenant et commencez à partager votre voix avec le monde.
                         </p>
+                        <% if(errors !== undefined && Object.keys(errors).length !== 0) { %>
+                            <div class="mobile-text bg-danger texte-white p-2">
+                                <%= errors %>
+                            </div>
+                        <% } %>
                         <!-- formulaire -->
                         <div class="my-5">
                             <!-- * * * * * * * * * * * * * * *-->
@@ -40,7 +45,7 @@
                             <form id="contactForm" method="POST" action="/users/new" enctype="multipart/form-data">
                                 <div class="form-floating">
                                     <input name="name" class="form-control" id="name" type="text" placeholder="saisir votre prenom et nom..." />
-                                    <label for="name">Prénom et Nom</label>
+                                    <label for="name">Prénom Nom</label>
                                 </div>
                                 <div class="form-floating">
                                     <input name="username" class="form-control" id="username" type="text" placeholder="saisir votre nom d'utilisateur..." />

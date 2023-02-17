@@ -27,7 +27,8 @@ const updateComment = async (req, res) => {
         return res.redirect(`/courses/${courseId}`);
     } 
     catch (error) {
-        return res.render('404/notFound')
+        console.error(error.message)
+        return res.redirect('/404')
     }
 }
 

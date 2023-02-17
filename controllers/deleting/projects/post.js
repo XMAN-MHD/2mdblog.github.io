@@ -20,7 +20,8 @@ const deletePost = async (req, res) => {
         // return to home page
         return res.redirect('/projets');
     } catch (error) {
-        return res.render('404/notFound')
+        console.error(error)
+        return res.redirect('/404')
     }
 }
 

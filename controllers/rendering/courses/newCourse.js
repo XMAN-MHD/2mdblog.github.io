@@ -2,9 +2,15 @@
     controller
 */ 
 const newCourse = (req, res) => {
+     // retrieve the errors from flash library
+     let errors = req.flash('validationErrors');
+     if(errors !== undefined) 
+     {
+         console.log('validation errors: ' + errors)
+     }
     res.render(
         'courses/newcourse', 
-        {editor: true}
+        {editor: true, errors:errors}
     );
 }
 /*

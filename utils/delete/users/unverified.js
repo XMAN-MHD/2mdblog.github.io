@@ -22,7 +22,7 @@ const deleteUnverifiedUser = async() => {
     // Find unverified users created more than an hour ago
     const users = await userModel.find({
       isVerified: false,
-      createdAt: { $lte: now - 60 * 60 * 1000 }
+      createdAt: { $lte: now - 60 * 1000 }
     });
 
     // Delete the unverified users
