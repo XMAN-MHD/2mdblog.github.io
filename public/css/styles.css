@@ -2029,7 +2029,7 @@ progress {
   --bs-table-striped-color: #000;
   --bs-table-active-bg: #b8d0d4;
   --bs-table-active-color: #000;
-  --bs-table-hover-bg: #bdd6da;
+  --bs-table-hover-bg: #9c27b0;
   --bs-table-hover-color: #000;
   color: #000;
   border-color: #b8d0d4;
@@ -2053,7 +2053,7 @@ progress {
   --bs-table-striped-color: #000;
   --bs-table-active-bg: #bcd0c7;
   --bs-table-active-color: #000;
-  --bs-table-hover-bg: #c1d6cc;
+  --bs-table-hover-bg: #9c27b0;
   --bs-table-hover-color: #000;
   color: #000;
   border-color: #bcd0c7;
@@ -2065,7 +2065,7 @@ progress {
   --bs-table-striped-color: #000;
   --bs-table-active-bg: #badce3;
   --bs-table-active-color: #000;
-  --bs-table-hover-bg: #bfe2e9;
+  --bs-table-hover-bg: #9c27b0;
   --bs-table-hover-color: #000;
   color: #000;
   border-color: #badce3;
@@ -2077,7 +2077,7 @@ progress {
   --bs-table-striped-color: #000;
   --bs-table-active-bg: #e6dbb9;
   --bs-table-active-color: #000;
-  --bs-table-hover-bg: #ece1be;
+  --bs-table-hover-bg: #9c27b0;
   --bs-table-hover-color: #000;
   color: #000;
   border-color: #e6dbb9;
@@ -2089,7 +2089,7 @@ progress {
   --bs-table-striped-color: #000;
   --bs-table-active-bg: #dfc2c4;
   --bs-table-active-color: #000;
-  --bs-table-hover-bg: #e5c7ca;
+  --bs-table-hover-bg: #9c27b0;
   --bs-table-hover-color: #000;
   color: #000;
   border-color: #dfc2c4;
@@ -2101,7 +2101,7 @@ progress {
   --bs-table-striped-color: #000;
   --bs-table-active-bg: #dfe0e1;
   --bs-table-active-color: #000;
-  --bs-table-hover-bg: #e5e6e7;
+  --bs-table-hover-bg: #9c27b0;
   --bs-table-hover-color: #000;
   color: #000;
   border-color: #dfe0e1;
@@ -3739,13 +3739,13 @@ textarea.form-control-lg {
   border: 0;
 }
 .dropdown-item:hover, .dropdown-item:focus {
-  color: #1e2125;
-  background-color: #e9ecef;
+  color: white;
+  background-color: #9c27b0;
 }
 .dropdown-item.active, .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #0085A1;
+  background-color: #9c27b0;
 }
 .dropdown-item.disabled, .dropdown-item:disabled {
   color: #adb5bd;
@@ -3786,7 +3786,7 @@ textarea.form-control-lg {
 }
 .dropdown-menu-dark .dropdown-item.active, .dropdown-menu-dark .dropdown-item:active {
   color: #fff;
-  background-color: #0085A1;
+  background-color: #9c27b0;
 }
 .dropdown-menu-dark .dropdown-item.disabled, .dropdown-menu-dark .dropdown-item:disabled {
   color: #adb5bd;
@@ -3894,7 +3894,7 @@ textarea.form-control-lg {
   }
 }
 .nav-link:hover, .nav-link:focus {
-  color: #0085A1;
+  color: #9c27b0;
 }
 .nav-link.disabled {
   color: #6c757d;
@@ -4089,7 +4089,7 @@ textarea.form-control-lg {
     z-index: 1000;
     flex-grow: 1;
     visibility: visible !important;
-    background-color: transparent;
+    background-color: #9c27b0;
     border-right: 0;
     border-left: 0;
     transition: none;
@@ -4414,13 +4414,13 @@ textarea.form-control-lg {
   color: #fff;
 }
 .navbar-dark .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.55);
+  color: #9c27b0;
 }
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
-  color: rgba(255, 255, 255, 0.75);
+  color: #9c27b0
 }
 .navbar-dark .navbar-nav .nav-link.disabled {
-  color: rgba(255, 255, 255, 0.25);
+  color: #9c27b0
 }
 .navbar-dark .navbar-nav .show > .nav-link,
 .navbar-dark .navbar-nav .nav-link.active {
@@ -4434,12 +4434,12 @@ textarea.form-control-lg {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 .navbar-dark .navbar-text {
-  color: rgba(255, 255, 255, 0.55);
+  color: #9c27b0
 }
 .navbar-dark .navbar-text a,
 .navbar-dark .navbar-text a:hover,
 .navbar-dark .navbar-text a:focus {
-  color: #fff;
+  color: #9c27b0
 }
 
 .card {
@@ -11043,7 +11043,7 @@ blockquote {
   z-index: 1030;
   color: white;
   border-bottom: 1px solid #dee2e6;
-  background-color:#9c27b0;
+  background-color: #9c27b0;
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 #mainNav .navbar-brand {
@@ -11064,19 +11064,19 @@ blockquote {
 @media (min-width: 992px) {
   #mainNav {
     border-bottom: 1px solid transparent;
-    background: #9c27b0;
+    background: transparent;
   }
   #mainNav .navbar-brand {
     color: #fff;
   }
   #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: #9c27b0;
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link {
     color: white;
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link:hover {
-    color: black;
+    color: #9c27b0;
   }
 }
 @media (min-width: 992px) {
@@ -11099,13 +11099,13 @@ blockquote {
     color: #212529;
   }
   #mainNav.is-fixed .navbar-brand:focus, #mainNav.is-fixed .navbar-brand:hover {
-    color: #0085A1; 
+    color: #9c27b0; 
   }
   #mainNav.is-fixed .navbar-nav > li.nav-item > a {
     color: #212529;
   }
   #mainNav.is-fixed .navbar-nav > li.nav-item > a:focus, #mainNav.is-fixed .navbar-nav > li.nav-item > a:hover {
-    color: #0085A1;
+    color: #9c27b0;
   }
   #mainNav.is-visible {
     /* if the user changes the scrolling direction, we show the header */
@@ -11249,6 +11249,10 @@ header.masthead .site-heading .h1 {
 }
 
 /* my custom css */
+body
+{
+  background-color: #EBDEF0;
+}
 #update-comment-form #submit-btn
 {
   border: none;
@@ -11258,15 +11262,23 @@ header.masthead .site-heading .h1 {
 }
 .post-bg 
 {
-  background-color: #191919;
+  background-color: white;
 }
 .comment-bg 
 {
-  background-color: #191919;
+  background-color: white;
 }
 .texte-white 
 {
   color: white;
+}
+.texte-black 
+{
+  color: #1D1D1D;
+}
+.texte-purple 
+{
+  color: #9c27b0;
 }
 .post-meta-texte-size 
 {
@@ -11286,11 +11298,12 @@ header.masthead .site-heading .h1 {
 }
 .bgBlack-hover:hover 
 {
-  background-color: black;
+  background-color: #1D1D1D;
 }
 .bgPurple-hover:hover 
 {
   background-color:#9c27b0;
+  color: white;
 }
 .bgWhite-hover:hover 
 {
@@ -11307,4 +11320,53 @@ header.masthead .site-heading .h1 {
 .bgBlack 
 {
   background-color: black;
+}
+.border-purple {
+  border-color: #9c27b0 !important;
+}
+.add-little-padding
+{
+  padding:5px;
+}
+.add-large-padding
+{
+  padding:10px;
+}
+.add-larger-padding
+{
+  padding:50px;
+}
+.add-little-radius 
+{
+  border-radius: 5px;
+}
+.add-large-radius 
+{
+  border-radius: 10px;
+}
+.ellipse
+{
+  border:1px solid #9c27b0;
+  padding: 50px;
+  border-radius: 80px / 50px;
+}
+.imgCard 
+{
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+}
+.imgCircle 
+{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.post-items:hover h6, .post-items:hover span, .post-items:hover a
+{
+  color:white;
+}
+.border-bottom-li
+{
+  border-bottom: 2px solid #9c27b0;
 }

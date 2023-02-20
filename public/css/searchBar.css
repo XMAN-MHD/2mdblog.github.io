@@ -13,6 +13,7 @@
   {
     padding: 6px;
     font-size: 17px;
+    border: 1px solid #9c27b0;
   }
 
   .search-container button 
@@ -20,14 +21,15 @@
     width: 50px;
     padding: 6px;
     margin-left: 10px;
-    background: #191919;
-    color: white;
+    background: white;
+    color: black;
     font-size: 17px;
-    border: none;
+    border: 1px solid #9c27b0;
     cursor: pointer;
   }
 
   .search-container button:hover 
   {
     background: #9c27b0;
+    color:white;
   }
