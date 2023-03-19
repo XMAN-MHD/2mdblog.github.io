@@ -10,41 +10,50 @@
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <b class="text-uppercase">Apprenez à coder pour un avenir plus brillant !</b>
+                        <div class="texte-white">
+                            <div>
+                                <h1 class="text-uppercase">Apprenez à coder</h1> 
+                                <h3 class="text-uppercase">pour un avenir plus brillant !</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
         <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
+        <main class="container px-4 px-lg-5" style="margin-top: 100px;">
             <div>
-                <h1 class="my-5">Bienvenue sur notre Blog !</h1>                                                            
-                <div class="mt-2 mb-5 post-preview">
+                <div class="mb-5 p-5 bgWhite post-preview">
                     <!-- 2MD picture -->
-                    <figure class="img-2md">
-                        <img src="/assets/img/2md.jfif" class="imgCard" alt="...">
-                        <figcaption class=""><b class="text-uppercase">Mouhamed Moustapha Diouf (2MD)</b></figcaption>
-                    </figure>
+                    <!-- <figure class="img-2md">
+                        <img src="/assets/img/2md.jfif" class="imgCircle" alt="...">
+                        <figcaption class="name-2md ms-2"><b class="text-uppercase">Mouhamed Moustapha <br> Diouf (2MD)</b></figcaption>
+                    </figure> -->
+                    <b class="text-uppercase">Mouhamed Moustapha Diouf (2MD)</b>
                     <!-- Welcome Text -->
-                    <p class="post-meta" style="word-wrap: normal; text-align: justify;">
+                    <p class="post-meta" style="word-wrap: normal; text-align: justify; padding-right: 15%;">
                         Nous sommes passionnés par le développement web et croyons que c'est une compétence précieuse dans le monde d'aujourd'hui. 
-                        Dans ce blog, nous partagerons des conseils et des ressources pour vous aider à apprendre le développement web de manière réussie.
-                        On vous invite aussi à s'inscrire à nos cours spécialement créés pour devenir de futurs développeurs. 
-                        Que vous soyez un débutant complet ou que vous ayez déjà une certaine expérience, nous avons quelque chose pour tout le monde. De l'apprentissage des bases de HTML et CSS jusqu'à la plongée dans des sujets plus avancés tels que JavaScript et la programmation côté serveur, nous fournirons un soutien et une guidance à chaque étape du parcours.
-                        Nous croyons qu'avec dévouement et les bons outils, n'importe qui peut apprendre à coder et à construire ses propres sites web. 
-                        Nous vous remercions de vous joindre à nous dans ce voyage et espérons vous voir réussir dans vos objectifs de développement web !
+                        Dans notre blog, nous partagerons des conseils et des ressources pour vous aider à apprendre le développement web de manière réussie. 
+                        <br><br>
+                        <a href="#hidden-text" id="show-text-link">Lire Plus</a> 
+                        <span id="hidden-text">
+                            On vous invite aussi à s'inscrire à nos cours spécialement créés pour devenir de futurs développeurs. 
+                            Que vous soyez un débutant complet ou que vous ayez déjà une certaine expérience, nous avons quelque chose pour tout le monde. De l'apprentissage des bases de HTML et CSS jusqu'à la plongée dans des sujets plus avancés tels que JavaScript et la programmation côté serveur, nous fournirons un soutien et une guidance à chaque étape du parcours.
+                            Nous croyons qu'avec dévouement et les bons outils, n'importe qui peut apprendre à coder et à construire ses propres sites web. 
+                            Nous vous remercions de vous joindre à nous dans ce voyage et espérons vous voir réussir dans vos objectifs de développement web !
+                        </span> 
+                        <br><br>
+                        <a href="#hidden-text" id="hide-text-link">Lire Moins</a> 
                     </p>
                 </div>
-                <h1 class="mt-3 mb-5">Les Articles  du Blog</h1>
+                <h1 class="mt-3 mb-5">Les Dernières Nouvelles</h1>
                 <!-- Search Bar -->
-                <div class="search-container">
+                <!-- <div class="search-container">
                     <form action="/search/blog">
                         <input type="text" name="q" placeholder="Titre article..." required>
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
-                </div>
+                </div> -->
                 <!-- Blog posts -->
                 <div class="my-5">
                     <!-- list of posts -->
@@ -52,7 +61,7 @@
                         <ul id="items" class="list-group" >
                             <!-- post preview-->
                             <% for(var i = posts.length - 1; i >= 0; i--) { %>
-                                <li class="list-group-item post-bg border-purple add-large-radius bgPurple-hover post-items">
+                                <li class="list-group-item post-bg border-bottom-color hover-color post-items">
                                     <div class="post-preview add-little-padding" style="height: 100px; overflow-y: auto;">
                                         <a href="posts/<%= posts[i]._id %>" class="white-hover">
                                             <b class="text-decoration-underline"><%= posts[i].title %></b>
@@ -85,40 +94,8 @@
                         </a>
                     </div>
                 <% } %>
-                <!-- the comments on the recent posts if we have at least 5 items-->
-                <% if(!searching) { %>
-                <% if( (posts !== null) && (posts.length > 3) && (typeof posts !== undefined)) { %>
-                <div>
-                    <h5 style="margin: 20px 0;">Les commentaires sur les articles récents</h5>
-                        <!-- list of comments -->
-                        <ul class="list-group">
-                            <% for(var j = posts.length - 1; j > posts.length - 4; j--) { %>
-                                <!-- comment-->
-                                <% if( (posts[j].comments !== null) && (posts[j].comments.length > 0) && (typeof posts[j].comments !== undefined) ) { %>
-                                <li class="list-group-item comment-bg border-bottom-li">
-                                    <div>
-                                        <p>
-                                            <img src="/assets/img/2md.jpg" class="imgCircle" alt="">
-                                            <a href="/users/<%= posts[j].comments[0].authorId %>" class="text-decoration-none purple-hover">
-                                                <b class="text-uppercase"><%= posts[j].comments[0].author %></b>
-                                            </a>
-                                        </p>
-                                        <textarea class="form-control w-100 bg-white" style="border:none; max-height: 80px;" disabled rows="5"><%= posts[j].comments[0].body %></textarea>
-                                        <br>
-                                        <a href="posts/<%= posts[j]._id %>" class="purple-hover">
-                                            <b>Article: <%= posts[j].title %></b>
-                                        </a>
-                                    </div>  
-                                    <span class="fs-6 text-white black-hover"><%= posts[j].comments[0].dateOfComment.toLocaleDateString() %></span>
-                                </li>
-                                <% } %>
-                            <% } %>
-                        </ul>
-                </div>
-                <% } %>
-                <% } %>
             </div>
-        </div>
+        </main>
         <!-- Footer-->
         <%- include('../layout/footer.ejs') %>
         <!-- Bootstrap core JS-->
@@ -126,5 +103,7 @@
         <%- include('../layout/script.ejs') %> 
         <!-- Pagination JS-->
         <%- include('../layout/paginationScript.ejs') %>
+        <!-- Text panel -->
+        <script src="/js/text-panel.js"></script>
     </body>
 </html>

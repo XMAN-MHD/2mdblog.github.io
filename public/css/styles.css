@@ -4414,13 +4414,13 @@ textarea.form-control-lg {
   color: #fff;
 }
 .navbar-dark .navbar-nav .nav-link {
-  color: #9c27b0;
+  color: #353939;
 }
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
-  color: #9c27b0
+  color: #353939
 }
 .navbar-dark .navbar-nav .nav-link.disabled {
-  color: #9c27b0
+  color: #353939
 }
 .navbar-dark .navbar-nav .show > .nav-link,
 .navbar-dark .navbar-nav .nav-link.active {
@@ -4434,12 +4434,12 @@ textarea.form-control-lg {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 .navbar-dark .navbar-text {
-  color: #9c27b0
+  color: #353939
 }
 .navbar-dark .navbar-text a,
 .navbar-dark .navbar-text a:hover,
 .navbar-dark .navbar-text a:focus {
-  color: #9c27b0
+  color: #353939
 }
 
 .card {
@@ -11043,7 +11043,7 @@ blockquote {
   z-index: 1030;
   color: white;
   border-bottom: 1px solid #dee2e6;
-  background-color: #9c27b0;
+  background-color: #353939;
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 #mainNav .navbar-brand {
@@ -11093,7 +11093,7 @@ blockquote {
     top: -83px;
     transition: transform 0.2s;
     border-bottom: 1px solid white;
-    background-color: #9c27b0;
+    background-color: #353939;
   }
   #mainNav.is-fixed .navbar-brand {
     color: #212529;
@@ -11251,7 +11251,7 @@ header.masthead .site-heading .h1 {
 /* my custom css */
 body
 {
-  background-color: #EBDEF0;
+  background-color: whitesmoke;
 }
 #update-comment-form #submit-btn
 {
@@ -11321,8 +11321,8 @@ body
 {
   background-color: black;
 }
-.border-purple {
-  border-color: #9c27b0 !important;
+.border-color {
+  border: 1px solid #353939 !important;
 }
 .add-little-padding
 {
@@ -11350,23 +11350,62 @@ body
   padding: 50px;
   border-radius: 80px / 50px;
 }
+.img-2md
+{
+  display: flex;
+}
 .imgCard 
 {
   width: 200px;
   height: 200px;
-  border-radius: 5px;
+  border-radius: 5%;
 }
 .imgCircle 
 {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
+}
+.name-2md
+{
+  align-self: center;
 }
 .post-items:hover h6, .post-items:hover span, .post-items:hover a
 {
   color:white;
 }
-.border-bottom-li
+.border-bottom-color
 {
-  border-bottom: 2px solid #9c27b0;
+  border-bottom: 1px solid #353939;
+}
+.title-styles
+{
+  width: 60%;
+  margin: auto;
+}
+.hide
+{
+  display:none;
+}
+.hover-color:hover
+{
+  background-color: #5B5D5D;
+}
+.bg-color
+{
+  background-color: #353939;
+}
+.link-color
+{
+  color: var(--bs-red);
+}
+
+
+@media (max-width: 576px) {
+  .imgCircle 
+  {
+    width: 200px;
+    height: 150px;
+    border-radius: 50%;
+  }
 }

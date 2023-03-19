@@ -1,0 +1,4 @@
+main : #353939 #5B5D5D
+second: #fff
+third:
+bgColor:

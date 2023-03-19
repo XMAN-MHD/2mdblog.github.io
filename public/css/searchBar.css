@@ -2,7 +2,6 @@
   .search-container 
   {
     display: flex;
-    justify-content: flex-end;
   } 
   .search-container form 
   {
